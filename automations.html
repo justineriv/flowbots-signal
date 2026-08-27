@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workflow Automation Consulting | Strategy, Architecture &amp; Roadmap — FlowBots.ai</title>
+<meta name="description" content="Workflow automation consulting that turns complex processes into efficient systems. Expert guidance from analysis through implementation and optimization.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=13">
+<script>try{var q=location.search,off=/[?&]motion=off/.test(q),on=/[?&]motion=on/.test(q),r=window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(!off&&(on||!r))document.documentElement.classList.add('motion-on');}catch(e){}</script>
+</head>
+<body>
+<svg class="icon-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden"><defs><symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.2 3.5h3.1l1.5 3.9-2 1.4a12.4 12.4 0 0 0 6.4 6.4l1.4-2 3.9 1.5v3.1a2 2 0 0 1-2.2 2A16.6 16.6 0 0 1 4.2 5.7a2 2 0 0 1 2-2.2Z"/></symbol><symbol id="i-message" viewBox="0 0 24 24"><path d="M4 5.5h16v10.2H9.2L4 20V5.5Z"/><path d="M8.2 9.4h7.6M8.2 12.4h5"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.2 19 6v5.1c0 4.5-2.9 8-7 9.7-4.1-1.7-7-5.2-7-9.7V6l7-2.8Z"/><path d="M9.2 11.8 11.3 14l3.5-3.7"/></symbol><symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 3.2v4.4M15 3.2v4.4M6.2 7.6h11.6v3.1a5.8 5.8 0 0 1-11.6 0V7.6ZM12 16.5v4.3"/></symbol><symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.1"/><path d="M12 3.2v2.4M12 18.4v2.4M5.8 5.8l1.7 1.7M16.5 16.5l1.7 1.7M3.2 12h2.4M18.4 12h2.4M5.8 18.2l1.7-1.7M16.5 7.5l1.7-1.7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3.5 20.4h17"/><path d="M6.8 20.4v-6.2M11.4 20.4V7.6M16 20.4v-9.2"/></symbol><symbol id="i-sync" viewBox="0 0 24 24"><path d="M20.2 12a8.2 8.2 0 0 1-13.9 5.9M3.8 12A8.2 8.2 0 0 1 17.7 6.1"/><path d="M3.8 7.2V12h4.8M20.2 16.8V12h-4.8"/></symbol><symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.6 6.4h5.6l2 2.4h9.2v10.8H3.6V6.4Z"/><path d="M3.6 11.6h16.8"/></symbol><symbol id="i-puzzle" viewBox="0 0 24 24"><path d="M9.4 4.2h5.2v2.3a1.7 1.7 0 1 0 3.4 0V4.2h1.8v5.2h-2.3a1.7 1.7 0 1 0 0 3.4h2.3v6.9H4.2v-6.9h2.3a1.7 1.7 0 1 0 0-3.4H4.2V4.2h5.2Z"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.4 2.6 4.8 13.5h5.9l-1.1 7.9 8.6-10.9h-5.9l1.1-7.9Z"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.8" y="10.6" width="14.4" height="9.6" rx="2"/><path d="M8.2 10.6V7.9a3.8 3.8 0 0 1 7.6 0v2.7"/></symbol><symbol id="i-unlock" viewBox="0 0 24 24"><rect x="4.8" y="10.6" width="14.4" height="9.6" rx="2"/><path d="M8.2 10.6V7.9a3.8 3.8 0 0 1 7.1-1.9"/></symbol><symbol id="i-document" viewBox="0 0 24 24"><path d="M6.2 3.4h7.4l4.2 4.2v13H6.2V3.4Z"/><path d="M13.6 3.4v4.2h4.2M9.2 12.4h5.6M9.2 15.8h5.6"/></symbol><symbol id="i-flask" viewBox="0 0 24 24"><path d="M9.4 3.4v6.1L4.6 18a2 2 0 0 0 1.7 3h11.4a2 2 0 0 0 1.7-3l-4.8-8.5V3.4"/><path d="M8.2 3.4h7.6M7.4 14.2h9.2"/></symbol><symbol id="i-trending" viewBox="0 0 24 24"><path d="M3.4 16.8 9.2 11l3.7 3.7 7.7-7.7"/><path d="M15.4 7h5.2v5.2"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9.2" cy="8.4" r="3.2"/><path d="M3.6 19.6a5.6 5.6 0 0 1 11.2 0"/><path d="M16.2 6.2a3 3 0 0 1 0 5.9M17.4 14.6a5 5 0 0 1 3.2 4.6"/></symbol><symbol id="i-bot" viewBox="0 0 24 24"><rect x="4.4" y="8.2" width="15.2" height="10.6" rx="3"/><path d="M12 4.2v4M9.4 12.6v1.8M14.6 12.6v1.8M2.6 12.4v3M21.4 12.4v3"/><circle cx="12" cy="3.2" r="1.2"/></symbol><symbol id="i-tools" viewBox="0 0 24 24"><path d="M14.8 6.4a3.8 3.8 0 0 0 5 5l-9.6 9.6a2.2 2.2 0 0 1-3.1-3.1l9.6-9.6a3.8 3.8 0 0 0-5-5"/></symbol><symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3.4h12v17.2l-3-1.9-3 1.9-3-1.9-3 1.9V3.4Z"/><path d="M9 8.4h6M9 12.2h6"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.4 2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.8-5.4 2.8 1-6L3.3 9.8l6-.9L12 3.4Z"/></symbol><symbol id="i-mic" viewBox="0 0 24 24"><rect x="9.2" y="2.6" width="5.6" height="10.8" rx="2.8"/><path d="M5.4 11.6a6.6 6.6 0 0 0 13.2 0M12 18.2v3.2"/></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4.2 9.4a4 4 0 0 1 4-4h11.6M19.8 14.6a4 4 0 0 1-4 4H4.2"/><path d="M16.6 2.4 19.8 5.4l-3.2 3M7.4 15.6 4.2 18.6l3.2 3"/></symbol><symbol id="i-cpu" viewBox="0 0 24 24"><rect x="7.6" y="7.6" width="8.8" height="8.8" rx="1.6"/><path d="M10.6 2.8v4.8M13.4 2.8v4.8M10.6 16.4v4.8M13.4 16.4v4.8M2.8 10.6h4.8M2.8 13.4h4.8M16.4 10.6h4.8M16.4 13.4h4.8"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.8" y="5.4" width="16.4" height="15" rx="2"/><path d="M8.2 2.8v4.4M15.8 2.8v4.4M3.8 10.4h16.4"/></symbol><symbol id="i-card" viewBox="0 0 24 24"><rect x="2.8" y="5.2" width="18.4" height="13.6" rx="2.2"/><path d="M2.8 10h18.4M6.4 14.6h3.4"/></symbol><symbol id="i-ruler" viewBox="0 0 24 24"><path d="m3.4 15.4 12-12 5.2 5.2-12 12-5.2-5.2Z"/><path d="m7.4 11.4 2 2M10.6 8.2l2 2M13.8 5 15.8 7"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M12 6.8V12l3.4 2.2"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.6 4.6"/></symbol><symbol id="i-graduation" viewBox="0 0 24 24"><path d="M2.8 8.6 12 4.2l9.2 4.4-9.2 4.4L2.8 8.6Z"/><path d="M6.6 10.6v5.2c0 1.6 2.4 2.9 5.4 2.9s5.4-1.3 5.4-2.9v-5.2M20.4 9v5.4"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r="1"/></symbol><symbol id="i-home" viewBox="0 0 24 24"><path d="M3.8 10.8 12 3.8l8.2 7v9.4H3.8v-9.4Z"/><path d="M9.4 20.2v-5.6h5.2v5.6"/></symbol><symbol id="i-health" viewBox="0 0 24 24"><path d="M6.2 3.2v5.4a4.6 4.6 0 0 0 9.2 0V3.2"/><path d="M4.4 3.2h3.6M13.6 3.2h3.6M10.8 13a5.4 5.4 0 0 0 5.4 5.2 3.6 3.6 0 0 0 3.6-3.6v-1.2"/><circle cx="19.8" cy="11.4" r="2"/></symbol><symbol id="i-building" viewBox="0 0 24 24"><path d="M4.2 20.6V8.2L12 3.4l7.8 4.8v12.4"/><path d="M3 20.6h18M8 11.4h2.4M13.6 11.4H16M8 15.4h2.4M13.6 15.4H16"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m4.6 12.4 4.8 4.8 10-10.4"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6.2 6.2l11.6 11.6M17.8 6.2 6.2 17.8"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M3.8 7h16.4M3.8 12h16.4M3.8 17h16.4"/></symbol><symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 4.2v14.6M6.4 13.4 12 19l5.6-5.6"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.2" y="5.2" width="17.6" height="13.6" rx="2"/><path d="m3.8 6.6 8.2 6 8.2-6"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.6"/><circle cx="18" cy="18" r="2.6"/><path d="M8.6 6h5.8a3.6 3.6 0 0 1 0 7.2H9.6a3.6 3.6 0 0 0 0 7.2h.4"/></symbol></defs></svg>
+
+<div class="topbar">
+  <b>HIPAA Compliant &amp; SOC 2 Certified</b><span class="sep">|</span><span class="hide-m">Fixed-Price Proposals — No Surprise Invoices</span><span class="sep hide-m">|</span><span class="hide-m">Custom-Built — Not Templates</span>
+</div>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="home.html" aria-label="FlowBots.ai home">
+      <svg xmlns="http://www.w3.org/2000/svg" width="200" height="38" viewBox="0 0 320 60" role="img" aria-label="flowbots.ai"><g transform="translate(2 4)"><path stroke="#0A1628" stroke-linecap="round" stroke-width="2.5" d="M26 0v8"/><circle cx="26" r="3" fill="#0E8FB4"/><rect width="44" height="36" x="4" y="10" fill="#0A1628" rx="12" ry="12"/><rect width="6" height="12" y="22" fill="#0A1628" rx="3" ry="3"/><rect width="6" height="12" x="46" y="22" fill="#0A1628" rx="3" ry="3"/><rect width="28" height="16" x="12" y="18" fill="#0a1628" rx="6" ry="6"/><rect width="7" height="10" x="16" y="21" fill="#0E8FB4" rx="3" ry="3"/><rect width="7" height="10" x="29" y="21" fill="#0E8FB4" rx="3" ry="3"/><path stroke="#0a1628" stroke-linecap="round" stroke-width="2" d="M19 40h14"/></g><text x="62" y="40" fill="#0A1628" font-family="'Space Grotesk','DM Sans',Arial,sans-serif" font-size="34" font-weight="700" letter-spacing="-.5">flowbots<tspan fill="#0E8FB4">.ai</tspan></text></svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="solutions.html">Solutions</a></li>
+      <li><a href="industries.html">Industries</a></li>
+      <li><a href="automations.html" aria-current="page">Automations</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a class="nav-phone" href="tel:+15047174837" data-track="tel-click">(504) 717-4837</a>
+      <a class="btn btn-primary" href="https://www.flowbots.ai/book-call/" data-track="cta-book">Book My Free Discovery Call</a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Open menu"><svg class="ico" aria-hidden="true"><use href="#i-menu"></use></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-menu" aria-label="Mobile">
+    <a href="solutions.html">Solutions</a>
+    <a href="industries.html">Industries</a>
+    <a href="automations.html">Automations</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="blog.html">Blog</a>
+    <a href="tel:+15047174837" data-track="tel-click">(504) 717-4837</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div style="max-width:780px">
+      <p class="crumbs"><a href="home.html">Home</a><span class="sep">»</span><a href="automations.html">Custom AI Automations</a><span class="sep">»</span>Workflow Automation Consulting</p>
+      <span class="chip">Custom AI Automation</span>
+      <h1>Workflow Automation Consulting</h1>
+      <p class="lede">Workflow automation consulting that turns complex processes into efficient systems. Expert guidance from analysis through implementation and optimization.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg" href="https://www.flowbots.ai/book-call/" data-track="cta-book">Book My Free Discovery Call</a>
+        <a class="btn btn-ghost btn-lg" href="automations.html">See All Automations</a>
+      </div>
+      <p class="micro">30 minutes. Free. No pressure. No sales pitch.</p>
+      <div class="chips">
+        <span>HIPAA Compliant</span>
+        <span>SOC 2 Certified</span>
+        <span>Custom-Built — Not Templates</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="stat-grid reveal" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+      <div class="stat"><b class="countup" data-target="45" data-suffix="%">0%</b><span class="stat-label">Of work activities are automatable</span><span class="stat-src">McKinsey Global Institute</span></div>
+      <div class="stat"><b class="countup" data-target="3.50" data-prefix="$">$0</b><span class="stat-label">Return per $1 invested in AI</span><span class="stat-src">IBM Global AI Adoption Index</span></div>
+      <div class="stat"><b class="countup" data-target="80" data-suffix="%">0%</b><span class="stat-label">Cost reduction with automated processing</span><span class="stat-src">Ardent Partners 2025</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 · CAPABILITIES ============ -->
+<section class="tint">
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">01</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Capabilities</span>
+        <h2>How FlowBots Handles Workflow Automation Consulting</h2>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal"><div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-document"></use></svg></div><h3>Intelligent Data Extraction</h3><p>AI reads, interprets, and processes documents, forms, and inputs automatically.</p></div>
+      <div class="card reveal"><div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-gear"></use></svg></div><h3>Rule-Based Workflow Triggers</h3><p>Custom logic that matches your exact business rules and approval chains.</p></div>
+      <div class="card reveal"><div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-plug"></use></svg></div><h3>Multi-System Integration</h3><p>Connects with your CRM, EHR, accounting, calendar, and any other tools you use.</p></div>
+      <div class="card reveal"><div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-search"></use></svg></div><h3>Error Detection &amp; Correction</h3><p>Built-in validation catches mistakes before they become costly problems.</p></div>
+      <div class="card reveal"><div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-chart"></use></svg></div><h3>Real-Time Monitoring</h3><p>Live dashboards and alerts so you always know the status of every process.</p></div>
+      <div class="card reveal"><div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-shield"></use></svg></div><h3>Compliance &amp; Audit Trails</h3><p>Full logging and documentation to meet HIPAA, PCI, and industry-specific requirements.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 · LONG-FORM ============ -->
+<section>
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">02</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">The Case for Strategy</span>
+        <h2>Where Automation Budgets Go Wrong</h2>
+      </div>
+    </div>
+    <div class="prose reveal">
+      <h2>Most Automation Projects Fail Because They Automate the Wrong Processes</h2>
+      <p class="drop">Businesses eager to automate often start with the most visible process — not the most impactful one. They invest $50,000 in automating a workflow that saves 10 hours per month while a neighboring process consuming 200 staff hours monthly remains untouched. Without strategic guidance, automation becomes an expensive experiment instead of a business transformation. FlowBots.ai workflow automation consulting ensures every automation dollar targets the processes with the highest measurable return.</p>
+      <p>FlowBots.ai workflow automation consulting maps existing business processes, identifies automation candidates based on ROI potential, designs automation architectures, creates implementation roadmaps, and provides ongoing optimization guidance — turning scattered automation efforts into a coordinated operational strategy.</p>
+
+      <h2>What Workflow Automation Consulting Includes</h2>
+      <p>Discovery starts with interviewing department leads, observing current workflows, documenting process steps, and measuring time-per-task. This discovery phase typically reveals 3-5x more automation opportunities than the business initially identified.</p>
+      <p>Every candidate then goes onto a roadmap, scored on four criteria: time savings potential, error reduction impact, revenue acceleration capability, and implementation complexity. Quick wins that deliver ROI within 30 days are scheduled first.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 · ENGAGEMENT PROCESS ============ -->
+<section class="tint">
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">03</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">The Engagement</span>
+        <h2>The Consulting Engagement Process</h2>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card reveal">
+        <span class="card-num">Phase 1</span>
+        <h3>Process Discovery and Documentation</h3>
+        <p>We map every step in targeted business processes, documenting inputs, outputs, decision points, exception handling, system touchpoints, and cycle times. Discovery includes shadowing staff during actual workflow execution — not just interviewing them — because workers often underestimate or skip steps when describing their processes verbally.</p>
+      </div>
+      <div class="card reveal">
+        <span class="card-num">Phase 2</span>
+        <h3>Opportunity Assessment and Prioritization</h3>
+        <p>Each documented process receives a composite automation score based on volume, duration, error rate, and revenue impact, creating a data-driven priority list rather than automating based on departmental politics or executive pet projects.</p>
+      </div>
+      <div class="card reveal">
+        <span class="card-num">Phase 3</span>
+        <h3>Architecture Design</h3>
+        <p>We specify integration points, data flows, trigger events, decision logic, exception handling, and monitoring requirements. Architecture documents serve as blueprints for implementation, ensuring every automation is built to scale.</p>
+      </div>
+      <div class="card reveal">
+        <span class="card-num">Phase 4</span>
+        <h3>Roadmap and Implementation Planning</h3>
+        <p>You get a phased implementation roadmap with timelines, resource requirements, dependency mapping, and projected ROI per phase. Each phase builds on the previous one, creating compounding returns.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · WHO NEEDS IT ============ -->
+<section>
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">04</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Fit</span>
+        <h2>Who Needs Workflow Automation Consulting</h2>
+      </div>
+    </div>
+    <div class="prose reveal">
+      <p>Organizations with 15-500 employees typically have the highest density of automatable processes relative to their operational complexity.</p>
+    </div>
+    <div class="grid-3 mt-4">
+      <div class="card reveal"><span class="card-num">i.</span><h3>Healthcare Organizations</h3><p>Healthcare organizations navigating patient intake, billing, scheduling, and compliance simultaneously need strategic guidance to determine which automation delivers the fastest impact without disrupting clinical operations.</p></div>
+      <div class="card reveal"><span class="card-num">ii.</span><h3>Home Services Companies</h3><p>Home services companies scaling from 10 to 50+ trucks face operational breakdowns in dispatching, billing, and customer communication that consulting identifies and prioritizes systematically.</p></div>
+      <div class="card reveal"><span class="card-num">iii.</span><h3>Professional Services Firms</h3><p>Professional services firms where billable hour pressure makes process improvement a lower priority use FlowBots.ai consulting to identify the specific automations that free the most billable hours with the least disruption.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 · CONSULTING VS DIY ============ -->
+<section class="tint">
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">05</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">The Comparison</span>
+        <h2>Consulting vs. DIY Automation Approach</h2>
+      </div>
+    </div>
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr><th scope="col">Dimension</th><th scope="col">DIY Approach</th><th scope="col">FlowBots Consulting</th></tr></thead>
+        <tbody>
+          <tr><td>Process selection</td><td>Based on loudest complaint</td><td class="hl">Based on measured ROI potential</td></tr>
+          <tr><td>Hidden processes found</td><td>0 — only known processes considered</td><td class="hl">3-5x more opportunities identified</td></tr>
+          <tr><td>Architecture quality</td><td>Built for today's volume</td><td class="hl">Designed to scale with growth</td></tr>
+          <tr><td>Integration planning</td><td>Point solutions, data silos</td><td class="hl">Connected ecosystem design</td></tr>
+          <tr><td>ROI timeline</td><td>Unclear, often 6-12 months</td><td class="hl">Quick wins within 30 days, full ROI in 90</td></tr>
+          <tr><td>Risk of wasted investment</td><td>High — 50%+ of DIY automation projects underdeliver</td><td class="hl">Low — data-driven prioritization</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 · FAQ ============ -->
+<section>
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">06</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Common Questions</span>
+        <h2>Consulting Engagements, Answered</h2>
+      </div>
+    </div>
+    <div class="faq reveal">
+      <details open>
+        <summary><span class="q-tag">Timeline</span>How long is a consulting engagement?</summary>
+        <div class="faq-a">2-4 weeks from discovery through roadmap delivery.</div>
+      </details>
+      <details>
+        <summary><span class="q-tag">Scope</span>Do FlowBots.ai consultants implement the automations they recommend?</summary>
+        <div class="faq-a">Yes. FlowBots.ai provides end-to-end service from consulting through implementation, so the team that maps your processes is the team that builds the system.</div>
+      </details>
+      <details>
+        <summary><span class="q-tag">Fit</span>What if we already know which single process to automate?</summary>
+        <div class="faq-a">Businesses that have already identified the process can skip the full consulting engagement and proceed directly to business process analysis.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 · START WITH STRATEGY ============ -->
+<section class="tint">
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">07</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">The Bottom Line</span>
+        <h2>Start With Strategy, Not Software</h2>
+      </div>
+    </div>
+    <div class="prose reveal">
+      <p>The most expensive automation is one that automates the wrong process. FlowBots.ai conducts a complimentary process discovery session during a free call, identifying the top 3 automation opportunities by ROI potential.</p>
+    </div>
+
+    <div class="cmp mt-4 reveal">
+      <div class="cmp-col bad">
+        <span class="cmp-tag">Doing It Manually</span>
+        <h3>The Cost of Status Quo</h3>
+        <ul>
+          <li>Hours of repetitive work</li>
+          <li>Human errors</li>
+          <li>Bottlenecks when staff out</li>
+          <li>Inconsistent quality</li>
+          <li>Impossible to scale</li>
+        </ul>
+      </div>
+      <div class="cmp-col good">
+        <span class="cmp-tag">With Custom AI Automation</span>
+        <h3>What Changes</h3>
+        <ul>
+          <li>Runs in seconds — 24/7</li>
+          <li>99.9% accuracy</li>
+          <li>Never calls in sick</li>
+          <li>Consistent output with audit trails</li>
+          <li>Scales infinitely</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid-2 mt-3">
+      <div class="stat-detail reveal">
+        <span class="tag">Time Lost</span>
+        <b class="n">4h 38m</b>
+        <h4>Every Week, Per Employee</h4>
+        <p>The average employee spends 4 hours and 38 minutes per week on duplicate, repetitive tasks — that's over 240 hours per year of work a machine should handle.</p>
+        <span class="src">Source: Clockify 2025</span>
+      </div>
+      <div class="stat-detail reveal">
+        <span class="tag">Accuracy</span>
+        <b class="n">99.9%</b>
+        <h4>Automated vs. Manual Data Entry</h4>
+        <p>Automated systems achieve 99.959% to 99.99% accuracy, compared to 96–99.45% for manual data entry. The error reduction alone often pays for the entire project.</p>
+        <span class="src">Source: Quality Magazine / Conexiom</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 · RELATED AUTOMATIONS ============ -->
+<section>
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">08</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Related</span>
+        <h2>Related Custom Automations</h2>
+      </div>
+    </div>
+    <div class="grid-3">
+      <a class="post-card reveal" href="automations.html"><h3>Accounts Payable Automation</h3><p>Automate accounts Payable Automation with custom AI workflows.</p><span class="read">View automation →</span></a>
+      <a class="post-card reveal" href="automations.html"><h3>Accounts Receivable Automation</h3><p>Automate accounts Receivable Automation with custom AI workflows.</p><span class="read">View automation →</span></a>
+      <a class="post-card reveal" href="automations.html"><h3>Automation Strategy Development</h3><p>Automate automation Strategy Development with custom AI workflows.</p><span class="read">View automation →</span></a>
+      <a class="post-card reveal" href="automations.html"><h3>Bespoke Bot Development</h3><p>Automate bespoke Bot Development with custom AI workflows.</p><span class="read">View automation →</span></a>
+      <a class="post-card reveal" href="automations.html"><h3>Business Process Analysis</h3><p>Automate business Process Analysis with custom AI workflows.</p><span class="read">View automation →</span></a>
+      <a class="post-card reveal" href="automations.html"><h3>Compliance &amp; Audit Automation</h3><p>Automate compliance &amp; Audit Automation with custom AI workflows.</p><span class="read">View automation →</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 09 · PROTECT YOUR INVESTMENT ============ -->
+<section class="tint">
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">09</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Our Commitments</span>
+        <h2>How We Protect Your Investment</h2>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal"><span class="card-num">i.</span><h4>Fixed-Price Proposals</h4><p>You know exactly what you're paying before any work begins. No surprise invoices. No scope creep charges.</p></div>
+      <div class="card reveal"><span class="card-num">ii.</span><h4>Your Data Stays Yours</h4><p>The code, the automations, the integrations — it's all yours. We don't hold your business hostage on our platform.</p></div>
+      <div class="card reveal"><span class="card-num">iii.</span><h4>No Long-Term Contracts</h4><p>Stay because the results speak for themselves, not because you're locked in. Month-to-month support after launch.</p></div>
+    </div>
+
+    <div class="center mt-4 reveal">
+      <h2>Ready to Automate Workflow Automation Consulting?</h2>
+      <p class="muted mt-1" style="max-width:620px;margin-left:auto;margin-right:auto">Get a free workflow assessment.</p>
+      <p class="mt-3"><a class="btn btn-primary btn-lg" href="https://www.flowbots.ai/book-call/" data-track="cta-book">Book My Free Discovery Call</a></p>
+      <p class="micro">Or call us directly: <a href="tel:+15047174837" data-track="tel-click">(504) 717-4837</a></p>
+    </div>
+  </div>
+</section>
+
+
+<section class="lead-section" id="assessment">
+  <div class="wrap lead-grid">
+    <div class="lead-copy">
+      <span class="eyebrow">Free Automation Assessment</span>
+      <h2>See exactly what we would automate in your business</h2>
+      <p>Tell us what is eating your team's time. We map your current workflows and send back the three automations with the strongest projected return, before you commit to anything.</p>
+      <ul class="lead-assure">
+        <li>No cost and no obligation</li>
+        <li>A reply within one business day</li>
+        <li>HIPAA compliant and SOC 2 certified</li>
+        <li>Your data and workflows stay yours</li>
+      </ul>
+      <p class="lead-alt">Would rather talk it through now? <a href="tel:+15047174837" data-track="tel-click">Call (504) 717-4837</a></p>
+    </div>
+
+    <form class="lead-form" novalidate data-leadform>
+      <div class="field">
+        <label for="lf-name">Your name</label>
+        <input id="lf-name" name="name" type="text" autocomplete="name" required aria-describedby="lf-name-err">
+        <span class="field-err" id="lf-name-err" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="lf-email">Work email</label>
+        <input id="lf-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="lf-email-err">
+        <span class="field-err" id="lf-email-err" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="lf-phone">Phone <span class="opt">(optional)</span></label>
+        <input id="lf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="lf-phone-hint">
+        <span class="field-hint" id="lf-phone-hint">Add it if you would prefer we call you back.</span>
+      </div>
+      <div class="field">
+        <label for="lf-problem">What is eating your team's time?</label>
+        <select id="lf-problem" name="problem" required aria-describedby="lf-problem-err">
+          <option value="">Choose the closest one</option>
+          <option>We are missing calls after hours</option>
+          <option>Leads go cold before we follow up</option>
+          <option>My team is buried in repetitive tasks</option>
+          <option>We need to scale without hiring</option>
+          <option>Something else</option>
+        </select>
+        <span class="field-err" id="lf-problem-err" role="alert"></span>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg lead-submit">Get My Free Assessment</button>
+      <p class="lead-privacy">We use your details only to prepare and send your assessment. See our <a href="https://www.flowbots.ai/privacy-policy/">Privacy Policy</a>.</p>
+    </form>
+
+    <div class="lead-success" hidden role="status">
+      <span class="lead-tick" aria-hidden="true">
+        <svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg>
+      </span>
+      <h3>Your assessment request is in</h3>
+      <p>We will map your workflows and reply within one business day with the three automations we would build first, and what each is worth.</p>
+      <p class="lead-alt">Need it sooner? <a href="tel:+15047174837" data-track="tel-click">Call (504) 717-4837</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRE-FOOTER CTA ============ -->
+<section class="prefoot">
+  <div class="wrap">
+    <h2 class="reveal">Stop Losing Leads While You Sleep</h2>
+    <p class="reveal">Your AI employee works 24/7 — answering calls, booking appointments, following up on leads.</p>
+    <div class="reveal">
+      <a class="btn btn-accent btn-lg" href="https://www.flowbots.ai/book-call/" data-track="cta-book">Book My Free Discovery Call</a>
+      <p class="micro">HIPAA Compliant · SOC 2 Certified · Custom-Built AI — Not Templates</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="170" height="32" viewBox="0 0 320 60" role="img" aria-label="flowbots.ai"><g transform="translate(2 4)"><path stroke="#fff" stroke-linecap="round" stroke-width="2.5" d="M26 0v8"/><circle cx="26" r="3" fill="#38badf"/><rect width="44" height="36" x="4" y="10" fill="#fff" rx="12" ry="12"/><rect width="6" height="12" y="22" fill="#fff" rx="3" ry="3"/><rect width="6" height="12" x="46" y="22" fill="#fff" rx="3" ry="3"/><rect width="28" height="16" x="12" y="18" fill="#0a1628" rx="6" ry="6"/><rect width="7" height="10" x="16" y="21" fill="#38badf" rx="3" ry="3"/><rect width="7" height="10" x="29" y="21" fill="#38badf" rx="3" ry="3"/><path stroke="#0a1628" stroke-linecap="round" stroke-width="2" d="M19 40h14"/></g><text x="62" y="40" fill="#fff" font-family="'Space Grotesk','DM Sans',Arial,sans-serif" font-size="34" font-weight="700" letter-spacing="-.5">flowbots<tspan fill="#38badf">.ai</tspan></text></svg>
+        <p class="footer-tag">We don't sell software. We build AI systems custom-designed around how your business actually runs.</p>
+        <p><a href="tel:+15047174837" data-track="tel-click">(504) 717-4837</a></p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="https://www.flowbots.ai/contact/">Contact</a></li>
+          <li><a href="https://www.flowbots.ai/privacy-policy/">Privacy Policy</a></li>
+          <li><a href="https://www.flowbots.ai/terms-of-service/">Terms of Service</a></li>
+          <li><a href="https://www.flowbots.ai/hipaa-compliance/">HIPAA Compliance</a></li>
+          <li><a href="https://www.flowbots.ai/data-security/">Data Security</a></li>
+          <li><a href="https://www.flowbots.ai/accessibility/">Accessibility</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="automations.html">Custom AI Automation</a></li>
+          <li><a href="solutions.html">Voice AI</a></li>
+          <li><a href="solutions.html">SMS AI</a></li>
+          <li><a href="solutions.html">Email AI</a></li>
+          <li><a href="solutions.html">Social AI</a></li>
+          <li><a href="solutions.html">White-Label</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Industries</h4>
+        <ul>
+          <li><a href="industries.html">Healthcare</a></li>
+          <li><a href="industries.html">Home Services</a></li>
+          <li><a href="industries.html">Professional Services</a></li>
+          <li><a href="industries.html">Automotive</a></li>
+          <li><a href="industries.html">Fitness &amp; Wellness</a></li>
+          <li><a href="industries.html">View All Industries</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="https://www.flowbots.ai/book-call/" data-track="cta-book">Book a Call</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="https://www.flowbots.ai/ai-automation-knowledge-base/">Knowledge Base</a></li>
+          <li><a href="https://www.flowbots.ai/hipaa-compliance/">HIPAA Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>HIPAA Compliant | SOC 2 Certified | Custom-Built AI — Not Templates</span>
+      <span>Contact: <a href="mailto:support@flowbots.ai">support@flowbots.ai</a> · © 2026 FlowBots.ai. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="sticky-cta">
+  <a class="btn btn-ghost" href="tel:+15047174837">Call (504) 717-4837</a>
+  <a class="btn btn-primary" href="https://www.flowbots.ai/book-call/" data-track="cta-book">Book My Free Discovery Call</a>
+</div>
+
+<script src="app.js?v=13"></script>
+</body>
+</html>

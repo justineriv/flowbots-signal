@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FlowBots.ai — Signal</title>
+<meta name="description" content="Three design directions for flowbots.ai. Switch direction, page, and device.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B1020;
+  --panel:#111832;
+  --panel-2:#161F3E;
+  --line:rgba(150,170,220,.16);
+  --line-2:rgba(150,170,220,.34);
+  --ink:#EDF2FA;
+  --muted:#9BA9C6;
+  --faint:#6B7896;
+  --cyan:#38BADF;
+  --cyan-bright:#6FD8F6;
+  --ink-dark:#06222E;
+  --shadow:0 24px 70px rgba(2,6,20,.6);
+  --font-display:"Space Grotesk",system-ui,sans-serif;
+  --font-body:"Inter",system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:var(--font-body);background:var(--bg);color:var(--ink);
+  display:flex;flex-direction:column;overflow:hidden;-webkit-font-smoothing:antialiased;
+}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;border-radius:6px}
+
+/* ---------- top control bar ---------- */
+.bar{
+  flex-shrink:0;background:var(--panel);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:22px;padding:12px 20px;flex-wrap:wrap;
+}
+.bar-brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.bar-brand svg{height:26px;width:auto}
+.bar-brand .tag{
+  font-family:var(--font-display);font-size:.68rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--cyan);border:1px solid var(--line-2);
+  border-radius:999px;padding:4px 11px;white-space:nowrap;
+}
+.group{display:flex;align-items:center;gap:10px}
+.group-label{
+  font-family:var(--font-display);font-size:.66rem;font-weight:600;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--faint);white-space:nowrap;
+}
+.seg{display:flex;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:3px;gap:2px}
+.seg button{
+  background:none;border:0;color:var(--muted);padding:8px 15px;border-radius:7px;
+  font-size:.86rem;font-weight:500;transition:background .16s,color .16s;white-space:nowrap;
+  display:flex;align-items:center;gap:7px;
+}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--cyan);color:var(--ink-dark);font-weight:600}
+.seg .swatch{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.sw1{background:linear-gradient(135deg,#0A1628 50%,#38BADF 50%)}
+.sw2{background:linear-gradient(135deg,#FBFAF7 50%,#0E8FB4 50%)}
+.sw3{background:linear-gradient(135deg,#38BADF,#7B6CF6 55%,#C86DD7)}
+
+select{
+  background:var(--panel-2);border:1px solid var(--line);color:var(--ink);
+  padding:9px 13px;border-radius:9px;font-size:.88rem;font-family:inherit;min-width:190px;
+}
+select:hover{border-color:var(--line-2)}
+
+.bar-right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.linkbtn{
+  background:var(--panel-2);border:1px solid var(--line);color:var(--muted);
+  padding:9px 15px;border-radius:9px;font-size:.84rem;font-weight:500;
+  display:inline-flex;align-items:center;gap:7px;text-decoration:none;transition:all .16s;
+}
+.linkbtn:hover{color:var(--ink);border-color:var(--line-2)}
+
+/* ---------- stage ---------- */
+.stage{
+  flex:1;min-height:0;display:block;overflow:auto;padding:26px;
+  background:
+    radial-gradient(900px 500px at 50% -10%,rgba(56,186,223,.08),transparent 65%),
+    var(--bg);
+}
+/* Block layout, not flex: as a flex child the wrapper shrink-fits and the
+   device widths below resolve against a collapsed parent instead of the stage. */
+.stage-inner{max-width:100%}
+.frame-wrap{
+  transition:width .3s cubic-bezier(.2,.8,.3,1);
+  width:100%;max-width:100%;margin:0 auto;
+}
+.frame-wrap.desktop{width:100%;max-width:1600px}
+.frame-wrap{--frame-bg:#FBFAF7}
+.frame-wrap.tablet{width:834px;max-width:100%}
+.frame-wrap.mobile{width:412px;max-width:100%}
+
+.device{
+  background:var(--panel);border:1px solid var(--line-2);border-radius:14px;
+  box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;
+}
+.frame-wrap.tablet .device,.frame-wrap.mobile .device{border-radius:26px;padding:10px;background:#1A2340}
+.frame-wrap.mobile .device{border-radius:34px;padding:11px}
+.device-chrome{
+  display:flex;align-items:center;gap:8px;padding:9px 14px;
+  border-bottom:1px solid var(--line);background:var(--panel-2);flex-shrink:0;
+}
+.frame-wrap.tablet .device-chrome,.frame-wrap.mobile .device-chrome{display:none}
+.device-chrome .dot{width:10px;height:10px;border-radius:50%}
+.dot-r{background:#FF6B6B}.dot-y{background:#FFC65C}.dot-g{background:#3FDFA5}
+.device-chrome .url{
+  margin-left:12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;
+  padding:4px 12px;font-size:.75rem;color:var(--faint);flex:1;max-width:420px;
+}
+.notch{
+  display:none;height:22px;align-items:center;justify-content:center;flex-shrink:0;
+}
+.frame-wrap.mobile .notch{display:flex}
+.notch::before{content:"";width:110px;height:5px;border-radius:3px;background:rgba(255,255,255,.22)}
+
+iframe{
+  width:100%;border:0;display:block;background:var(--frame-bg,#0A1628);
+  height:calc(100vh - 160px);
+}
+.frame-wrap.tablet iframe{height:1100px;max-height:calc(100vh - 130px);border-radius:16px}
+.frame-wrap.mobile iframe{height:880px;max-height:calc(100vh - 130px);border-radius:24px}
+
+/* ---------- loading + meta ---------- */
+.stage-meta{
+  text-align:center;color:var(--faint);font-size:.78rem;margin:14px auto 0;max-width:900px;
+}
+.stage-meta b{color:var(--muted);font-weight:600}
+
+/* ---------- welcome overlay ---------- */
+.welcome{
+  position:fixed;inset:0;z-index:100;background:rgba(6,11,25,.94);backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:center;padding:24px;overflow:auto;
+}
+.welcome.hide{display:none}
+.welcome-card{
+  background:var(--panel);border:1px solid var(--line-2);border-radius:18px;
+  padding:44px;max-width:620px;box-shadow:var(--shadow);
+}
+.welcome-card h1{font-family:var(--font-display);font-size:1.9rem;margin-bottom:14px;letter-spacing:-.02em}
+.welcome-card p{color:var(--muted);margin-bottom:16px;font-size:.98rem}
+.welcome-card ul{list-style:none;margin:20px 0}
+.welcome-card li{
+  color:var(--muted);font-size:.92rem;padding:10px 0 10px 28px;position:relative;
+  border-top:1px solid var(--line);
+}
+.welcome-card li:first-child{border-top:0}
+.welcome-card li::before{content:"▸";position:absolute;left:6px;color:var(--cyan)}
+.welcome-card li b{color:var(--ink);font-weight:600}
+.welcome-card .start{
+  background:var(--cyan);color:var(--ink-dark);border:0;border-radius:10px;
+  padding:15px 30px;font-family:var(--font-display);font-weight:600;font-size:1rem;
+  margin-top:10px;transition:transform .16s,background .16s;
+}
+.welcome-card .start:hover{background:var(--cyan-bright);transform:translateY(-1px)}
+
+@media(max-width:980px){
+  .bar{gap:14px;padding:10px 14px}
+  .group-label{display:none}
+  .bar-right{display:none}
+  .stage{padding:14px}
+  .frame-wrap.tablet,.frame-wrap.mobile{width:100%}
+  .device-chrome{display:none}
+  iframe{height:calc(100vh - 130px)}
+  .welcome-card{padding:30px 24px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition-duration:.001s!important}
+}
+</style>
+</head>
+<body>
+
+<!-- welcome -->
+<div class="welcome" id="welcome">
+  <div class="welcome-card">
+    <h1>FlowBots.ai — Signal</h1>
+    <p>Every page below is a working prototype built with the copy from your live site. Nothing here is published; it is for review only.</p>
+    <ul>
+      <li><b>Direction</b> — switch between the three design concepts. Same content, three different treatments.</li>
+      <li><b>Page</b> — nine page templates per direction: homepage, solutions, industries, automations, pricing, about, founder bio, blog index, and a blog article.</li>
+      <li><b>Device</b> — see each page as desktop, tablet, or mobile.</li>
+    </ul>
+    <p style="font-size:.88rem">The homepages are animated, and the How It Works steps advance on their own or when you click a step.</p>
+    <button class="start" id="startBtn">Start reviewing</button>
+  </div>
+</div>
+
+<!-- control bar -->
+<header class="bar">
+  <div class="bar-brand">
+    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="28" viewBox="0 0 320 60" role="img" aria-label="flowbots.ai"><g transform="translate(2 4)"><path stroke="#fff" stroke-linecap="round" stroke-width="2.5" d="M26 0v8"/><circle cx="26" r="3" fill="#38badf"/><rect width="44" height="36" x="4" y="10" fill="#fff" rx="12" ry="12"/><rect width="6" height="12" y="22" fill="#fff" rx="3" ry="3"/><rect width="6" height="12" x="46" y="22" fill="#fff" rx="3" ry="3"/><rect width="28" height="16" x="12" y="18" fill="#0a1628" rx="6" ry="6"/><rect width="7" height="10" x="16" y="21" fill="#38badf" rx="3" ry="3"/><rect width="7" height="10" x="29" y="21" fill="#38badf" rx="3" ry="3"/><path stroke="#0a1628" stroke-linecap="round" stroke-width="2" d="M19 40h14"/></g><text x="62" y="40" fill="#fff" font-family="'Space Grotesk',Arial,sans-serif" font-size="34" font-weight="700" letter-spacing="-.5">flowbots<tspan fill="#38badf">.ai</tspan></text></svg>
+    <span class="tag">Signal</span>
+  </div>
+
+  <div class="group">
+    <span class="group-label">Page</span>
+    <select id="pageSel" aria-label="Page">
+      <option value="home.html">Homepage</option>
+      <option value="solutions.html">Solutions — After-Hours Call Coverage</option>
+      <option value="industries.html">Industries — Medical &amp; Dental</option>
+      <option value="automations.html">Automations — Workflow Consulting</option>
+      <option value="pricing.html">Pricing</option>
+      <option value="about.html">About</option>
+      <option value="bio.html">Founder Bio — Brian &amp; Hanson</option>
+      <option value="blog.html">Blog Index</option>
+      <option value="blog-post.html">Blog Article</option>
+    </select>
+  </div>
+
+  <div class="group">
+    <span class="group-label">Device</span>
+    <div class="seg" id="devSeg" role="group" aria-label="Device preview">
+      <button data-dev="desktop" aria-pressed="true">Desktop</button>
+      <button data-dev="tablet" aria-pressed="false">Tablet</button>
+      <button data-dev="mobile" aria-pressed="false">Mobile</button>
+    </div>
+  </div>
+
+  <div class="group">
+    <span class="group-label">Motion</span>
+    <div class="seg" id="motionSeg" role="group" aria-label="Animation">
+      <button data-motion="on" aria-pressed="true">Animated</button>
+      <button data-motion="off" aria-pressed="false">Static</button>
+    </div>
+  </div>
+
+  <div class="bar-right">
+    <a class="linkbtn" id="openNew" href="home.html?motion=on" target="_blank" rel="noopener">Open full screen ↗</a>
+  </div>
+</header>
+
+<!-- stage -->
+<main class="stage">
+  <div class="stage-inner">
+    <div class="frame-wrap desktop" id="frameWrap">
+      <div class="device">
+        <div class="device-chrome">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <span class="url" id="urlBar">flowbots.ai</span>
+        </div>
+        <div class="notch"></div>
+        <iframe id="preview" src="d1/home.html" title="Design preview"></iframe>
+      </div>
+    </div>
+    <p class="stage-meta" id="stageMeta"><b>Direction 1 — Mission Control</b> · Homepage · Desktop</p>
+  </div>
+</main>
+
+<script>
+(function(){
+  var PAGE_URLS = {
+    'home.html':'flowbots.ai',
+    'solutions.html':'flowbots.ai/services/voice-ai/after-hours-call-coverage/',
+    'industries.html':'flowbots.ai/industries/healthcare/medical-dental-practices/',
+    'automations.html':'flowbots.ai/custom-ai-automations/workflow-automation-consulting/',
+    'pricing.html':'flowbots.ai/pricing/',
+    'about.html':'flowbots.ai/about/',
+    'bio.html':'flowbots.ai/about/brian-hong/',
+    'blog.html':'flowbots.ai/blog/',
+    'blog-post.html':'flowbots.ai/ai-for-tour-operators-automate-bookings-confirmations-and-reviews/'
+  };
+
+  var page = 'home.html', dev = 'desktop', motion = 'on';
+  var frame = document.getElementById('preview');
+  var wrap = document.getElementById('frameWrap');
+  var meta = document.getElementById('stageMeta');
+  var urlBar = document.getElementById('urlBar');
+  var openNew = document.getElementById('openNew');
+  var pageSel = document.getElementById('pageSel');
+
+  function labelFor(sel){
+    var o = sel.options[sel.selectedIndex];
+    return o ? o.textContent.split('—')[0].trim() : '';
+  }
+  function render(){
+    // ?motion=on tells the page to animate even when the viewer's OS asks for
+    // reduced motion — otherwise these prototypes look completely static.
+    var q = motion === 'on' ? '?motion=on' : '?motion=off';
+    frame.src = page + q;
+    wrap.className = 'frame-wrap ' + dev;
+    urlBar.textContent = PAGE_URLS[page] || 'flowbots.ai';
+    openNew.href = page + q;
+    meta.innerHTML = '<b>Signal</b> · ' + labelFor(pageSel) +
+      ' · ' + dev.charAt(0).toUpperCase() + dev.slice(1) + ' &nbsp;·&nbsp; Light editorial system. Warm paper, deep navy ink, geometric headlines. Consultancy-grade and calm.';
+  }
+  function bindSeg(id, attr, setter){
+    var seg = document.getElementById(id);
+    seg.addEventListener('click', function(e){
+      var btn = e.target.closest('button');
+      if(!btn) return;
+      seg.querySelectorAll('button').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
+      btn.setAttribute('aria-pressed','true');
+      setter(btn.getAttribute(attr));
+      render();
+    });
+  }
+  bindSeg('devSeg','data-dev',function(v){ dev = v; });
+  bindSeg('motionSeg','data-motion',function(v){ motion = v; });
+  pageSel.addEventListener('change', function(){ page = pageSel.value; render(); });
+
+  /* Always open on the Homepage. The previous build restored the last view
+     from localStorage, so reopening the link dropped you wherever you left
+     off instead of at the start of the walkthrough. */
+
+  /* welcome overlay — shown once per browser */
+  var welcome = document.getElementById('welcome');
+  var seen = false;
+  try{ seen = localStorage.getItem('fb-welcome') === '1'; }catch(e){}
+  if(seen) welcome.classList.add('hide');
+  document.getElementById('startBtn').addEventListener('click', function(){
+    welcome.classList.add('hide');
+    try{ localStorage.setItem('fb-welcome','1'); }catch(e){}
+  });
+
+  /* keyboard: arrows change page */
+  document.addEventListener('keydown', function(e){
+    if(e.target.tagName === 'SELECT' || !welcome.classList.contains('hide')) return;
+    if(e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
+      var i = pageSel.selectedIndex + (e.key === 'ArrowRight' ? 1 : -1);
+      if(i < 0) i = pageSel.options.length - 1;
+      if(i >= pageSel.options.length) i = 0;
+      pageSel.selectedIndex = i;
+      page = pageSel.value;
+      render();
+    }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
