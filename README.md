@@ -8,7 +8,6 @@ Light editorial system. Warm paper, deep navy ink, geometric headlines. Consulta
 |---|---|
 | **Page** | Switch between the nine page templates. |
 | **Device** | Desktop, tablet or mobile rendering. |
-| **Motion** | Animated (default) or Static. See the note below if animation looks frozen. |
 
 It always opens on the Homepage.
 
@@ -34,12 +33,6 @@ It always opens on the Homepage.
 - **Animation is confined to the homepage hero.** Every other page is static.
 - Founder bio content beyond the About-page text is marked with bracketed placeholders.
 
-### If animation looks frozen
-
-Windows and macOS both have a system setting that stops sites animating, and browsers obey it
-silently. The **Motion** control overrides it and is on by default. To fix it at the source:
-Windows 11 → Settings → Accessibility → Visual effects → Animation effects on. macOS → System
-Settings → Accessibility → Display → Reduce motion off.
 
 ---
 Prepared by Infintech Designs for FlowBots.ai.

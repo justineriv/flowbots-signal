@@ -226,14 +226,6 @@ iframe{
     </div>
   </div>
 
-  <div class="group">
-    <span class="group-label">Motion</span>
-    <div class="seg" id="motionSeg" role="group" aria-label="Animation">
-      <button data-motion="on" aria-pressed="true">Animated</button>
-      <button data-motion="off" aria-pressed="false">Static</button>
-    </div>
-  </div>
-
   <div class="bar-right">
     <a class="linkbtn" id="openNew" href="home.html?motion=on" target="_blank" rel="noopener">Open full screen ↗</a>
   </div>
@@ -270,7 +262,7 @@ iframe{
     'blog-post.html':'flowbots.ai/ai-for-tour-operators-automate-bookings-confirmations-and-reviews/'
   };
 
-  var page = 'home.html', dev = 'desktop', motion = 'on';
+  var page = 'home.html', dev = 'desktop';
   var frame = document.getElementById('preview');
   var wrap = document.getElementById('frameWrap');
   var meta = document.getElementById('stageMeta');
@@ -285,7 +277,7 @@ iframe{
   function render(){
     // ?motion=on tells the page to animate even when the viewer's OS asks for
     // reduced motion — otherwise these prototypes look completely static.
-    var q = motion === 'on' ? '?motion=on' : '?motion=off';
+    var q = '?motion=on';   // the designs are always animated
     frame.src = page + q;
     wrap.className = 'frame-wrap ' + dev;
     urlBar.textContent = PAGE_URLS[page] || 'flowbots.ai';
@@ -305,7 +297,6 @@ iframe{
     });
   }
   bindSeg('devSeg','data-dev',function(v){ dev = v; });
-  bindSeg('motionSeg','data-motion',function(v){ motion = v; });
   pageSel.addEventListener('change', function(){ page = pageSel.value; render(); });
 
   /* Always open on the Homepage. The previous build restored the last view
