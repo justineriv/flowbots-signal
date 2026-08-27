@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=27">
+<link rel="stylesheet" href="style.css?v=28">
 <script>/* These are the animated designs: motion is on unless a URL explicitly
    asks for ?motion=off. A production build should restore respect for
    prefers-reduced-motion; this is a review prototype. */
@@ -387,6 +387,65 @@ try{if(!/[?&]motion=off/.test(location.search))document.documentElement.classLis
   </div>
 </section>
 
+
+<section class="lead-section sec-feature" id="assessment">
+  <div class="wrap lead-grid">
+    <div class="lead-copy">
+      <span class="eyebrow">Free Automation Assessment</span>
+      <h2>See exactly what we would automate in your business</h2>
+      <p>Tell us what is eating your team's time. We map your current workflows and send back the three automations with the strongest projected return, before you commit to anything.</p>
+      <ul class="lead-assure">
+        <li>No cost and no obligation</li>
+        <li>A reply within one business day</li>
+        <li>HIPAA compliant and SOC 2 certified</li>
+        <li>Your data and workflows stay yours</li>
+      </ul>
+      <p class="lead-alt">Would rather talk it through now? <a href="tel:+15047174837" data-track="tel-click">Call (504) 717-4837</a></p>
+    </div>
+
+    <form class="lead-form" novalidate data-leadform>
+      <div class="field">
+        <label for="lf-name">Your name</label>
+        <input id="lf-name" name="name" type="text" autocomplete="name" required aria-describedby="lf-name-err">
+        <span class="field-err" id="lf-name-err" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="lf-email">Work email</label>
+        <input id="lf-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="lf-email-err">
+        <span class="field-err" id="lf-email-err" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="lf-phone">Phone <span class="opt">(optional)</span></label>
+        <input id="lf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="lf-phone-hint">
+        <span class="field-hint" id="lf-phone-hint">Add it if you would prefer we call you back.</span>
+      </div>
+      <div class="field">
+        <label for="lf-problem">What is eating your team's time?</label>
+        <select id="lf-problem" name="problem" required aria-describedby="lf-problem-err">
+          <option value="">Choose the closest one</option>
+          <option>We are missing calls after hours</option>
+          <option>Leads go cold before we follow up</option>
+          <option>My team is buried in repetitive tasks</option>
+          <option>We need to scale without hiring</option>
+          <option>Something else</option>
+        </select>
+        <span class="field-err" id="lf-problem-err" role="alert"></span>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg lead-submit">Get My Free Assessment</button>
+      <p class="lead-privacy">We use your details only to prepare and send your assessment. See our <a href="https://www.flowbots.ai/privacy-policy/">Privacy Policy</a>.</p>
+    </form>
+
+    <div class="lead-success" hidden role="status">
+      <span class="lead-tick" aria-hidden="true">
+        <svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg>
+      </span>
+      <h3>Your assessment request is in</h3>
+      <p>We will map your workflows and reply within one business day with the three automations we would build first, and what each is worth.</p>
+      <p class="lead-alt">Need it sooner? <a href="tel:+15047174837" data-track="tel-click">Call (504) 717-4837</a></p>
+    </div>
+  </div>
+</section>
+
 <!-- ============ 08 · THE INVESTMENT ============ -->
 <section class="sec-inset">
   <div class="wrap">
@@ -405,6 +464,15 @@ try{if(!/[?&]motion=off/.test(location.search))document.documentElement.classLis
     <p class="center mt-3 muted reveal" style="max-width:700px;margin-left:auto;margin-right:auto">Projects start at <strong style="color:var(--ink)">$15,000</strong>. Most clients see measurable ROI within <strong style="color:var(--ink)">90 days</strong>. We give you a fixed-price proposal before any work begins — you know exactly what you're investing before you sign anything.</p>
   </div>
 </section>
+
+
+<!-- ============ CTA STRIP ============ -->
+<div class="cta-strip">
+  <div class="wrap cta-strip-inner">
+    <p>Run these numbers against your own workflows and see what comes back.</p>
+    <a class="btn btn-primary" href="#assessment" data-track="cta-strip-roi">Get My Free Assessment</a>
+  </div>
+</div>
 
 <!-- ============ 09 · NOT A $99 CHATBOT ============ -->
 <section class="sec-wash">
@@ -443,6 +511,15 @@ try{if(!/[?&]motion=off/.test(location.search))document.documentElement.classLis
     <p class="center mt-3 muted reveal" style="max-width:720px;margin-left:auto;margin-right:auto">Template platforms give you tools. We give you a finished, working system that runs your operations from day one. The difference is the same as buying a hammer versus hiring a contractor to build your house.</p>
   </div>
 </section>
+
+
+<!-- ============ CTA STRIP ============ -->
+<div class="cta-strip">
+  <div class="wrap cta-strip-inner">
+    <p>Every project starts with a fixed-price proposal, so you know the number before any work begins.</p>
+    <a class="btn btn-primary" href="https://www.flowbots.ai/book-call/" data-track="cta-strip-price">Book My Free Discovery Call</a>
+  </div>
+</div>
 
 <!-- ============ 10 · SPEED TABLE ============ -->
 <section style="padding-top:0">
@@ -549,6 +626,15 @@ try{if(!/[?&]motion=off/.test(location.search))document.documentElement.classLis
   </div>
 </section>
 
+
+<!-- ============ CTA STRIP ============ -->
+<div class="cta-strip">
+  <div class="wrap cta-strip-inner">
+    <p>We automate any business with a phone, a CRM, or a team doing repetitive work.</p>
+    <a class="btn btn-primary" href="#assessment" data-track="cta-strip-industry">See What We'd Automate</a>
+  </div>
+</div>
+
 <!-- ============ 12 · WHO WE ARE ============ -->
 <section class="sec-panel">
   <div class="wrap">
@@ -651,6 +737,15 @@ try{if(!/[?&]motion=off/.test(location.search))document.documentElement.classLis
   </div>
 </section>
 
+
+<!-- ============ CTA STRIP ============ -->
+<div class="cta-strip">
+  <div class="wrap cta-strip-inner">
+    <p>Answers for your specific business take about thirty minutes.</p>
+    <a class="btn btn-primary" href="https://www.flowbots.ai/book-call/" data-track="cta-strip-faq">Book My Free Discovery Call</a>
+  </div>
+</div>
+
 <!-- ============ 14 · BLOG TEASER ============ -->
 <section class="sec-panel">
   <div class="wrap">
@@ -686,64 +781,6 @@ try{if(!/[?&]motion=off/.test(location.search))document.documentElement.classLis
   </div>
 </section>
 
-
-<section class="lead-section sec-feature" id="assessment">
-  <div class="wrap lead-grid">
-    <div class="lead-copy">
-      <span class="eyebrow">Free Automation Assessment</span>
-      <h2>See exactly what we would automate in your business</h2>
-      <p>Tell us what is eating your team's time. We map your current workflows and send back the three automations with the strongest projected return, before you commit to anything.</p>
-      <ul class="lead-assure">
-        <li>No cost and no obligation</li>
-        <li>A reply within one business day</li>
-        <li>HIPAA compliant and SOC 2 certified</li>
-        <li>Your data and workflows stay yours</li>
-      </ul>
-      <p class="lead-alt">Would rather talk it through now? <a href="tel:+15047174837" data-track="tel-click">Call (504) 717-4837</a></p>
-    </div>
-
-    <form class="lead-form" novalidate data-leadform>
-      <div class="field">
-        <label for="lf-name">Your name</label>
-        <input id="lf-name" name="name" type="text" autocomplete="name" required aria-describedby="lf-name-err">
-        <span class="field-err" id="lf-name-err" role="alert"></span>
-      </div>
-      <div class="field">
-        <label for="lf-email">Work email</label>
-        <input id="lf-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="lf-email-err">
-        <span class="field-err" id="lf-email-err" role="alert"></span>
-      </div>
-      <div class="field">
-        <label for="lf-phone">Phone <span class="opt">(optional)</span></label>
-        <input id="lf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="lf-phone-hint">
-        <span class="field-hint" id="lf-phone-hint">Add it if you would prefer we call you back.</span>
-      </div>
-      <div class="field">
-        <label for="lf-problem">What is eating your team's time?</label>
-        <select id="lf-problem" name="problem" required aria-describedby="lf-problem-err">
-          <option value="">Choose the closest one</option>
-          <option>We are missing calls after hours</option>
-          <option>Leads go cold before we follow up</option>
-          <option>My team is buried in repetitive tasks</option>
-          <option>We need to scale without hiring</option>
-          <option>Something else</option>
-        </select>
-        <span class="field-err" id="lf-problem-err" role="alert"></span>
-      </div>
-      <button type="submit" class="btn btn-primary btn-lg lead-submit">Get My Free Assessment</button>
-      <p class="lead-privacy">We use your details only to prepare and send your assessment. See our <a href="https://www.flowbots.ai/privacy-policy/">Privacy Policy</a>.</p>
-    </form>
-
-    <div class="lead-success" hidden role="status">
-      <span class="lead-tick" aria-hidden="true">
-        <svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg>
-      </span>
-      <h3>Your assessment request is in</h3>
-      <p>We will map your workflows and reply within one business day with the three automations we would build first, and what each is worth.</p>
-      <p class="lead-alt">Need it sooner? <a href="tel:+15047174837" data-track="tel-click">Call (504) 717-4837</a></p>
-    </div>
-  </div>
-</section>
 
 <!-- ============ PRE-FOOTER CTA ============ -->
 <section class="prefoot">
@@ -852,6 +889,6 @@ try{if(!/[?&]motion=off/.test(location.search))document.documentElement.classLis
 })();
 </script>
 
-<script src="app.js?v=27"></script>
+<script src="app.js?v=28"></script>
 </body>
 </html>
