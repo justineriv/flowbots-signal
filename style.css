@@ -837,5 +837,8 @@ section{position:relative}
 .rv-device button:hover{color:#fff;background:rgba(255,255,255,.10)}
 .rv-device button[aria-pressed="true"]{background:#fff;color:#0B1020}
 .rv-device button:focus-visible{outline:2px solid #38BADF;outline-offset:2px}
-@media(max-width:640px){.rv-device{right:10px;bottom:10px;padding:4px 5px 4px 10px;font-size:.74rem}}
+/* Below 820px the sticky conversion bar owns the bottom strip, so the
+   review control sits above it rather than on top of the CTA. */
+@media(max-width:820px){.rv-device{bottom:86px}}
+@media(max-width:640px){.rv-device{right:10px;bottom:86px;padding:4px 5px 4px 10px;font-size:.74rem}}
 @media print{.rv-device{display:none}}
