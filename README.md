@@ -2,14 +2,13 @@
 
 Light editorial system. Warm paper, deep navy ink, geometric headlines. Consultancy-grade and calm.
 
-**Open `index.html`** (or the published link) and use the bar at the top:
 
-| Control | What it does |
-|---|---|
-| **Page** | Switch between the nine page templates. |
-| **Device** | Desktop, tablet or mobile rendering. |
 
-It always opens on the Homepage.
+**Open the link and browse it like the real site.** The navigation works — Solutions,
+Industries, Automations, Pricing, About and Blog all lead to the built pages.
+
+There is also a preview harness at **`preview.html`** if you want to jump straight to a
+specific template or check the tablet and mobile rendering side by side.
 
 ## The nine templates
 

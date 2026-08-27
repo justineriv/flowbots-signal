@@ -2,332 +2,804 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FlowBots.ai — Signal</title>
-<meta name="description" content="Three design directions for flowbots.ai. Switch direction, page, and device.">
+<title>FlowBots.ai — Custom AI Automation for Your Business | Voice AI, SMS, Workflow Automation</title>
+<meta name="description" content="We build custom AI automation for businesses like yours. Voice AI, SMS follow-up, workflow automation — if your team does it on a keyboard or phone, we build the AI that handles it 24/7.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#0B1020;
-  --panel:#111832;
-  --panel-2:#161F3E;
-  --line:rgba(150,170,220,.16);
-  --line-2:rgba(150,170,220,.34);
-  --ink:#EDF2FA;
-  --muted:#9BA9C6;
-  --faint:#6B7896;
-  --cyan:#38BADF;
-  --cyan-bright:#6FD8F6;
-  --ink-dark:#06222E;
-  --shadow:0 24px 70px rgba(2,6,20,.6);
-  --font-display:"Space Grotesk",system-ui,sans-serif;
-  --font-body:"Inter",system-ui,sans-serif;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%}
-body{
-  font-family:var(--font-body);background:var(--bg);color:var(--ink);
-  display:flex;flex-direction:column;overflow:hidden;-webkit-font-smoothing:antialiased;
-}
-button{font:inherit;cursor:pointer}
-:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;border-radius:6px}
-
-/* ---------- top control bar ---------- */
-.bar{
-  flex-shrink:0;background:var(--panel);border-bottom:1px solid var(--line);
-  display:flex;align-items:center;gap:22px;padding:12px 20px;flex-wrap:wrap;
-}
-.bar-brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
-.bar-brand svg{height:26px;width:auto}
-.bar-brand .tag{
-  font-family:var(--font-display);font-size:.68rem;font-weight:600;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--cyan);border:1px solid var(--line-2);
-  border-radius:999px;padding:4px 11px;white-space:nowrap;
-}
-.group{display:flex;align-items:center;gap:10px}
-.group-label{
-  font-family:var(--font-display);font-size:.66rem;font-weight:600;letter-spacing:.15em;
-  text-transform:uppercase;color:var(--faint);white-space:nowrap;
-}
-.seg{display:flex;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:3px;gap:2px}
-.seg button{
-  background:none;border:0;color:var(--muted);padding:8px 15px;border-radius:7px;
-  font-size:.86rem;font-weight:500;transition:background .16s,color .16s;white-space:nowrap;
-  display:flex;align-items:center;gap:7px;
-}
-.seg button:hover{color:var(--ink)}
-.seg button[aria-pressed="true"]{background:var(--cyan);color:var(--ink-dark);font-weight:600}
-.seg .swatch{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-.sw1{background:linear-gradient(135deg,#0A1628 50%,#38BADF 50%)}
-.sw2{background:linear-gradient(135deg,#FBFAF7 50%,#0E8FB4 50%)}
-.sw3{background:linear-gradient(135deg,#38BADF,#7B6CF6 55%,#C86DD7)}
-
-select{
-  background:var(--panel-2);border:1px solid var(--line);color:var(--ink);
-  padding:9px 13px;border-radius:9px;font-size:.88rem;font-family:inherit;min-width:190px;
-}
-select:hover{border-color:var(--line-2)}
-
-.bar-right{margin-left:auto;display:flex;align-items:center;gap:12px}
-.linkbtn{
-  background:var(--panel-2);border:1px solid var(--line);color:var(--muted);
-  padding:9px 15px;border-radius:9px;font-size:.84rem;font-weight:500;
-  display:inline-flex;align-items:center;gap:7px;text-decoration:none;transition:all .16s;
-}
-.linkbtn:hover{color:var(--ink);border-color:var(--line-2)}
-
-/* ---------- stage ---------- */
-.stage{
-  flex:1;min-height:0;display:block;overflow:auto;padding:26px;
-  background:
-    radial-gradient(900px 500px at 50% -10%,rgba(56,186,223,.08),transparent 65%),
-    var(--bg);
-}
-/* Block layout, not flex: as a flex child the wrapper shrink-fits and the
-   device widths below resolve against a collapsed parent instead of the stage. */
-.stage-inner{max-width:100%}
-.frame-wrap{
-  transition:width .3s cubic-bezier(.2,.8,.3,1);
-  width:100%;max-width:100%;margin:0 auto;
-}
-.frame-wrap.desktop{width:100%;max-width:1600px}
-.frame-wrap{--frame-bg:#FBFAF7}
-.frame-wrap.tablet{width:834px;max-width:100%}
-.frame-wrap.mobile{width:412px;max-width:100%}
-
-.device{
-  background:var(--panel);border:1px solid var(--line-2);border-radius:14px;
-  box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;
-}
-.frame-wrap.tablet .device,.frame-wrap.mobile .device{border-radius:26px;padding:10px;background:#1A2340}
-.frame-wrap.mobile .device{border-radius:34px;padding:11px}
-.device-chrome{
-  display:flex;align-items:center;gap:8px;padding:9px 14px;
-  border-bottom:1px solid var(--line);background:var(--panel-2);flex-shrink:0;
-}
-.frame-wrap.tablet .device-chrome,.frame-wrap.mobile .device-chrome{display:none}
-.device-chrome .dot{width:10px;height:10px;border-radius:50%}
-.dot-r{background:#FF6B6B}.dot-y{background:#FFC65C}.dot-g{background:#3FDFA5}
-.device-chrome .url{
-  margin-left:12px;background:var(--bg);border:1px solid var(--line);border-radius:6px;
-  padding:4px 12px;font-size:.75rem;color:var(--faint);flex:1;max-width:420px;
-}
-.notch{
-  display:none;height:22px;align-items:center;justify-content:center;flex-shrink:0;
-}
-.frame-wrap.mobile .notch{display:flex}
-.notch::before{content:"";width:110px;height:5px;border-radius:3px;background:rgba(255,255,255,.22)}
-
-iframe{
-  width:100%;border:0;display:block;background:var(--frame-bg,#0A1628);
-  height:calc(100vh - 160px);
-}
-.frame-wrap.tablet iframe{height:1100px;max-height:calc(100vh - 130px);border-radius:16px}
-.frame-wrap.mobile iframe{height:880px;max-height:calc(100vh - 130px);border-radius:24px}
-
-/* ---------- loading + meta ---------- */
-.stage-meta{
-  text-align:center;color:var(--faint);font-size:.78rem;margin:14px auto 0;max-width:900px;
-}
-.stage-meta b{color:var(--muted);font-weight:600}
-
-/* ---------- welcome overlay ---------- */
-.welcome{
-  position:fixed;inset:0;z-index:100;background:rgba(6,11,25,.94);backdrop-filter:blur(10px);
-  display:flex;align-items:center;justify-content:center;padding:24px;overflow:auto;
-}
-.welcome.hide{display:none}
-.welcome-card{
-  background:var(--panel);border:1px solid var(--line-2);border-radius:18px;
-  padding:44px;max-width:620px;box-shadow:var(--shadow);
-}
-.welcome-card h1{font-family:var(--font-display);font-size:1.9rem;margin-bottom:14px;letter-spacing:-.02em}
-.welcome-card p{color:var(--muted);margin-bottom:16px;font-size:.98rem}
-.welcome-card ul{list-style:none;margin:20px 0}
-.welcome-card li{
-  color:var(--muted);font-size:.92rem;padding:10px 0 10px 28px;position:relative;
-  border-top:1px solid var(--line);
-}
-.welcome-card li:first-child{border-top:0}
-.welcome-card li::before{content:"▸";position:absolute;left:6px;color:var(--cyan)}
-.welcome-card li b{color:var(--ink);font-weight:600}
-.welcome-card .start{
-  background:var(--cyan);color:var(--ink-dark);border:0;border-radius:10px;
-  padding:15px 30px;font-family:var(--font-display);font-weight:600;font-size:1rem;
-  margin-top:10px;transition:transform .16s,background .16s;
-}
-.welcome-card .start:hover{background:var(--cyan-bright);transform:translateY(-1px)}
-
-@media(max-width:980px){
-  .bar{gap:14px;padding:10px 14px}
-  .group-label{display:none}
-  .bar-right{display:none}
-  .stage{padding:14px}
-  .frame-wrap.tablet,.frame-wrap.mobile{width:100%}
-  .device-chrome{display:none}
-  iframe{height:calc(100vh - 130px)}
-  .welcome-card{padding:30px 24px}
-}
-@media (prefers-reduced-motion:reduce){
-  *{transition-duration:.001s!important}
-}
-</style>
+<link rel="stylesheet" href="style.css?v=13">
+<script>try{var q=location.search,off=/[?&]motion=off/.test(q),on=/[?&]motion=on/.test(q),r=window.matchMedia('(prefers-reduced-motion: reduce)').matches;if(!off&&(on||!r))document.documentElement.classList.add('motion-on');}catch(e){}</script>
 </head>
 <body>
+<svg class="icon-sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden"><defs><symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.2 3.5h3.1l1.5 3.9-2 1.4a12.4 12.4 0 0 0 6.4 6.4l1.4-2 3.9 1.5v3.1a2 2 0 0 1-2.2 2A16.6 16.6 0 0 1 4.2 5.7a2 2 0 0 1 2-2.2Z"/></symbol><symbol id="i-message" viewBox="0 0 24 24"><path d="M4 5.5h16v10.2H9.2L4 20V5.5Z"/><path d="M8.2 9.4h7.6M8.2 12.4h5"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.2 19 6v5.1c0 4.5-2.9 8-7 9.7-4.1-1.7-7-5.2-7-9.7V6l7-2.8Z"/><path d="M9.2 11.8 11.3 14l3.5-3.7"/></symbol><symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 3.2v4.4M15 3.2v4.4M6.2 7.6h11.6v3.1a5.8 5.8 0 0 1-11.6 0V7.6ZM12 16.5v4.3"/></symbol><symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.1"/><path d="M12 3.2v2.4M12 18.4v2.4M5.8 5.8l1.7 1.7M16.5 16.5l1.7 1.7M3.2 12h2.4M18.4 12h2.4M5.8 18.2l1.7-1.7M16.5 7.5l1.7-1.7"/></symbol><symbol id="i-chart" viewBox="0 0 24 24"><path d="M3.5 20.4h17"/><path d="M6.8 20.4v-6.2M11.4 20.4V7.6M16 20.4v-9.2"/></symbol><symbol id="i-sync" viewBox="0 0 24 24"><path d="M20.2 12a8.2 8.2 0 0 1-13.9 5.9M3.8 12A8.2 8.2 0 0 1 17.7 6.1"/><path d="M3.8 7.2V12h4.8M20.2 16.8V12h-4.8"/></symbol><symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.6 6.4h5.6l2 2.4h9.2v10.8H3.6V6.4Z"/><path d="M3.6 11.6h16.8"/></symbol><symbol id="i-puzzle" viewBox="0 0 24 24"><path d="M9.4 4.2h5.2v2.3a1.7 1.7 0 1 0 3.4 0V4.2h1.8v5.2h-2.3a1.7 1.7 0 1 0 0 3.4h2.3v6.9H4.2v-6.9h2.3a1.7 1.7 0 1 0 0-3.4H4.2V4.2h5.2Z"/></symbol><symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.4 2.6 4.8 13.5h5.9l-1.1 7.9 8.6-10.9h-5.9l1.1-7.9Z"/></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect x="4.8" y="10.6" width="14.4" height="9.6" rx="2"/><path d="M8.2 10.6V7.9a3.8 3.8 0 0 1 7.6 0v2.7"/></symbol><symbol id="i-unlock" viewBox="0 0 24 24"><rect x="4.8" y="10.6" width="14.4" height="9.6" rx="2"/><path d="M8.2 10.6V7.9a3.8 3.8 0 0 1 7.1-1.9"/></symbol><symbol id="i-document" viewBox="0 0 24 24"><path d="M6.2 3.4h7.4l4.2 4.2v13H6.2V3.4Z"/><path d="M13.6 3.4v4.2h4.2M9.2 12.4h5.6M9.2 15.8h5.6"/></symbol><symbol id="i-flask" viewBox="0 0 24 24"><path d="M9.4 3.4v6.1L4.6 18a2 2 0 0 0 1.7 3h11.4a2 2 0 0 0 1.7-3l-4.8-8.5V3.4"/><path d="M8.2 3.4h7.6M7.4 14.2h9.2"/></symbol><symbol id="i-trending" viewBox="0 0 24 24"><path d="M3.4 16.8 9.2 11l3.7 3.7 7.7-7.7"/><path d="M15.4 7h5.2v5.2"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><circle cx="9.2" cy="8.4" r="3.2"/><path d="M3.6 19.6a5.6 5.6 0 0 1 11.2 0"/><path d="M16.2 6.2a3 3 0 0 1 0 5.9M17.4 14.6a5 5 0 0 1 3.2 4.6"/></symbol><symbol id="i-bot" viewBox="0 0 24 24"><rect x="4.4" y="8.2" width="15.2" height="10.6" rx="3"/><path d="M12 4.2v4M9.4 12.6v1.8M14.6 12.6v1.8M2.6 12.4v3M21.4 12.4v3"/><circle cx="12" cy="3.2" r="1.2"/></symbol><symbol id="i-tools" viewBox="0 0 24 24"><path d="M14.8 6.4a3.8 3.8 0 0 0 5 5l-9.6 9.6a2.2 2.2 0 0 1-3.1-3.1l9.6-9.6a3.8 3.8 0 0 0-5-5"/></symbol><symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3.4h12v17.2l-3-1.9-3 1.9-3-1.9-3 1.9V3.4Z"/><path d="M9 8.4h6M9 12.2h6"/></symbol><symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.4 2.7 5.5 6 .9-4.3 4.2 1 6-5.4-2.8-5.4 2.8 1-6L3.3 9.8l6-.9L12 3.4Z"/></symbol><symbol id="i-mic" viewBox="0 0 24 24"><rect x="9.2" y="2.6" width="5.6" height="10.8" rx="2.8"/><path d="M5.4 11.6a6.6 6.6 0 0 0 13.2 0M12 18.2v3.2"/></symbol><symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4.2 9.4a4 4 0 0 1 4-4h11.6M19.8 14.6a4 4 0 0 1-4 4H4.2"/><path d="M16.6 2.4 19.8 5.4l-3.2 3M7.4 15.6 4.2 18.6l3.2 3"/></symbol><symbol id="i-cpu" viewBox="0 0 24 24"><rect x="7.6" y="7.6" width="8.8" height="8.8" rx="1.6"/><path d="M10.6 2.8v4.8M13.4 2.8v4.8M10.6 16.4v4.8M13.4 16.4v4.8M2.8 10.6h4.8M2.8 13.4h4.8M16.4 10.6h4.8M16.4 13.4h4.8"/></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.8" y="5.4" width="16.4" height="15" rx="2"/><path d="M8.2 2.8v4.4M15.8 2.8v4.4M3.8 10.4h16.4"/></symbol><symbol id="i-card" viewBox="0 0 24 24"><rect x="2.8" y="5.2" width="18.4" height="13.6" rx="2.2"/><path d="M2.8 10h18.4M6.4 14.6h3.4"/></symbol><symbol id="i-ruler" viewBox="0 0 24 24"><path d="m3.4 15.4 12-12 5.2 5.2-12 12-5.2-5.2Z"/><path d="m7.4 11.4 2 2M10.6 8.2l2 2M13.8 5 15.8 7"/></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M12 6.8V12l3.4 2.2"/></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.6 4.6"/></symbol><symbol id="i-graduation" viewBox="0 0 24 24"><path d="M2.8 8.6 12 4.2l9.2 4.4-9.2 4.4L2.8 8.6Z"/><path d="M6.6 10.6v5.2c0 1.6 2.4 2.9 5.4 2.9s5.4-1.3 5.4-2.9v-5.2M20.4 9v5.4"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.4"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r="1"/></symbol><symbol id="i-home" viewBox="0 0 24 24"><path d="M3.8 10.8 12 3.8l8.2 7v9.4H3.8v-9.4Z"/><path d="M9.4 20.2v-5.6h5.2v5.6"/></symbol><symbol id="i-health" viewBox="0 0 24 24"><path d="M6.2 3.2v5.4a4.6 4.6 0 0 0 9.2 0V3.2"/><path d="M4.4 3.2h3.6M13.6 3.2h3.6M10.8 13a5.4 5.4 0 0 0 5.4 5.2 3.6 3.6 0 0 0 3.6-3.6v-1.2"/><circle cx="19.8" cy="11.4" r="2"/></symbol><symbol id="i-building" viewBox="0 0 24 24"><path d="M4.2 20.6V8.2L12 3.4l7.8 4.8v12.4"/><path d="M3 20.6h18M8 11.4h2.4M13.6 11.4H16M8 15.4h2.4M13.6 15.4H16"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="m4.6 12.4 4.8 4.8 10-10.4"/></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M6.2 6.2l11.6 11.6M17.8 6.2 6.2 17.8"/></symbol><symbol id="i-menu" viewBox="0 0 24 24"><path d="M3.8 7h16.4M3.8 12h16.4M3.8 17h16.4"/></symbol><symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 4.2v14.6M6.4 13.4 12 19l5.6-5.6"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.2" y="5.2" width="17.6" height="13.6" rx="2"/><path d="m3.8 6.6 8.2 6 8.2-6"/></symbol><symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.6"/><circle cx="18" cy="18" r="2.6"/><path d="M8.6 6h5.8a3.6 3.6 0 0 1 0 7.2H9.6a3.6 3.6 0 0 0 0 7.2h.4"/></symbol></defs></svg>
 
-<!-- welcome -->
-<div class="welcome" id="welcome">
-  <div class="welcome-card">
-    <h1>FlowBots.ai — Signal</h1>
-    <p>Every page below is a working prototype built with the copy from your live site. Nothing here is published; it is for review only.</p>
-    <ul>
-      <li><b>Direction</b> — switch between the three design concepts. Same content, three different treatments.</li>
-      <li><b>Page</b> — nine page templates per direction: homepage, solutions, industries, automations, pricing, about, founder bio, blog index, and a blog article.</li>
-      <li><b>Device</b> — see each page as desktop, tablet, or mobile.</li>
+<div class="topbar">
+  <b>HIPAA Compliant &amp; SOC 2 Certified</b><span class="sep">|</span><span class="hide-m">Fixed-Price Proposals — No Surprise Invoices</span><span class="sep hide-m">|</span><span class="hide-m">Custom-Built — Not Templates</span>
+</div>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="index.html" aria-label="FlowBots.ai home">
+      <svg xmlns="http://www.w3.org/2000/svg" width="200" height="38" viewBox="0 0 320 60" role="img" aria-label="flowbots.ai"><g transform="translate(2 4)"><path stroke="#0A1628" stroke-linecap="round" stroke-width="2.5" d="M26 0v8"/><circle cx="26" r="3" fill="#0E8FB4"/><rect width="44" height="36" x="4" y="10" fill="#0A1628" rx="12" ry="12"/><rect width="6" height="12" y="22" fill="#0A1628" rx="3" ry="3"/><rect width="6" height="12" x="46" y="22" fill="#0A1628" rx="3" ry="3"/><rect width="28" height="16" x="12" y="18" fill="#0a1628" rx="6" ry="6"/><rect width="7" height="10" x="16" y="21" fill="#0E8FB4" rx="3" ry="3"/><rect width="7" height="10" x="29" y="21" fill="#0E8FB4" rx="3" ry="3"/><path stroke="#0a1628" stroke-linecap="round" stroke-width="2" d="M19 40h14"/></g><text x="62" y="40" fill="#0A1628" font-family="'Space Grotesk','DM Sans',Arial,sans-serif" font-size="34" font-weight="700" letter-spacing="-.5">flowbots<tspan fill="#0E8FB4">.ai</tspan></text></svg>
+    </a>
+    <ul class="nav-links">
+      <li><a href="solutions.html">Solutions</a></li>
+      <li><a href="industries.html">Industries</a></li>
+      <li><a href="automations.html">Automations</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
     </ul>
-    <p style="font-size:.88rem">The homepages are animated, and the How It Works steps advance on their own or when you click a step.</p>
-    <button class="start" id="startBtn">Start reviewing</button>
+    <div class="nav-cta">
+      <a class="nav-phone" href="tel:+15047174837" data-track="tel-click">(504) 717-4837</a>
+      <a class="btn btn-primary" href="https://www.flowbots.ai/book-call/" data-track="cta-book">Book My Free Discovery Call</a>
+      <button class="nav-toggle" aria-expanded="false" aria-label="Open menu"><svg class="ico" aria-hidden="true"><use href="#i-menu"></use></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-menu" aria-label="Mobile">
+    <a href="solutions.html">Solutions</a>
+    <a href="industries.html">Industries</a>
+    <a href="automations.html">Automations</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="blog.html">Blog</a>
+    <a href="tel:+15047174837" data-track="tel-click">(504) 717-4837</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-fx" aria-hidden="true"><span class="fx-light fx-1"></span><span class="fx-light fx-2"></span><svg class="hero-flow" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><path class="flow-line" pathLength="100" d="M-40 120 C 220 90, 380 210, 620 190 S 1000 120, 1260 160"/><path class="flow-line" pathLength="100" d="M-40 250 C 260 230, 420 340, 700 300 S 1030 250, 1260 285"/><path class="flow-line" pathLength="100" d="M-40 380 C 200 400, 430 300, 660 380 S 1020 430, 1260 390"/><path class="flow-line" pathLength="100" d="M-40 500 C 240 520, 470 430, 720 480 S 1040 540, 1260 500"/><path class="flow-line" pathLength="100" d="M-40 60  C 300 40, 520 140, 780 100 S 1060 60, 1260 90"/><path class="flow-pulse p1" pathLength="100" d="M-40 120 C 220 90, 380 210, 620 190 S 1000 120, 1260 160"/><path class="flow-pulse p2" pathLength="100" d="M-40 250 C 260 230, 420 340, 700 300 S 1030 250, 1260 285"/><path class="flow-pulse p3" pathLength="100" d="M-40 380 C 200 400, 430 300, 660 380 S 1020 430, 1260 390"/><path class="flow-pulse p4" pathLength="100" d="M-40 500 C 240 520, 470 430, 720 480 S 1040 540, 1260 500"/><path class="flow-pulse p5" pathLength="100" d="M-40 60  C 300 40, 520 140, 780 100 S 1060 60, 1260 90"/></svg></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">Custom AI Automation for Every Industry</span>
+      <h1>We Automate the Work Your Team <em class="mark">Shouldn't Be Doing</em></h1>
+      <p class="lede">We build custom AI automation for businesses like yours. From answering calls and following up on leads to processing invoices, running onboarding, managing payroll, and operating your entire business — if your team does it on a keyboard or phone, we build the AI that handles it 24/7.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg" href="https://www.flowbots.ai/book-call/" data-track="cta-book">Book My Free Discovery Call</a>
+        <a class="btn btn-ghost btn-lg" href="pricing.html">See How It Works</a>
+      </div>
+      <p class="micro">30 minutes. Free. No pressure. No sales pitch.</p>
+      <p class="hero-meta"><b>Built for Healthcare, Home Services, Legal &amp; 25+ Industries</b><br>HIPAA Compliant · SOC 2 Certified · Custom-Built AI · Direct: <a href="tel:+15047174837" data-track="tel-click">(504) 717-4837</a></p>
+    </div>
+
+    <div>
+      <div class="console" aria-label="Live AI operations feed (illustrative)">
+        <div class="console-bar">
+          <span class="addr">flowbots.ai / ai-operations-center</span>
+          <span class="live-flag">Live</span>
+        </div>
+        <div class="feed" data-feed>
+          <div class="feed-item"><div class="feed-icon"><svg class="ico" aria-hidden="true"><use href="#i-phone"></use></svg></div><div><b>After-hours call answered</b><span>Appointment booked for Wed 2 PM</span></div><time>Just now</time></div>
+          <div class="feed-item"><div class="feed-icon"><svg class="ico" aria-hidden="true"><use href="#i-message"></use></svg></div><div><b>12 leads followed up via SMS</b><span>3 appointments booked automatically</span></div><time>2m ago</time></div>
+          <div class="feed-item"><div class="feed-icon"><svg class="ico" aria-hidden="true"><use href="#i-receipt"></use></svg></div><div><b>Invoice #4291 processed</b><span>Matched to PO, routed for approval</span></div><time>5m ago</time></div>
+          <div class="feed-item"><div class="feed-icon"><svg class="ico" aria-hidden="true"><use href="#i-folder"></use></svg></div><div><b>Payroll for 47 employees calculated</b><span>Overtime flagged, exceptions sent to HR</span></div><time>8m ago</time></div>
+          <div class="feed-item"><div class="feed-icon"><svg class="ico" aria-hidden="true"><use href="#i-sync"></use></svg></div><div><b>CRM synced: 8 new contacts</b><span>HubSpot → ServiceTitan → QuickBooks</span></div><time>12m ago</time></div>
+          <div class="feed-item"><div class="feed-icon"><svg class="ico" aria-hidden="true"><use href="#i-star"></use></svg></div><div><b>47 review requests sent</b><span>Post-service emails · 12 new 5-star reviews</span></div><time>15m ago</time></div>
+        </div>
+        <div class="console-foot">
+          <div><b class="countup" data-target="1247">0</b><span>Calls today</span></div>
+          <div><b class="countup" data-target="384">0</b><span>SMS convos</span></div>
+          <div><b class="countup" data-target="89">0</b><span>Tasks automated</span></div>
+          <div><b class="countup" data-target="6">0</b><span>Systems synced</span></div>
+        </div>
+      </div>
+
+      <div class="rail mt-2">
+        <div><b>25+</b><span>Industries served</span></div>
+        <div><b>40+</b><span>Automations we build</span></div>
+        <div><b>4–8 wks</b><span>Typical time to live</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VALUE STRIP ============ -->
+<div class="value-strip">
+  <div class="wrap value-grid">
+    <div class="value-cell"><h3>Every Call Answered</h3><p>24/7/365 — no voicemail, no hold times</p></div>
+    <div class="value-cell"><h3>&lt;30 Second Follow-Up</h3><p>Leads contacted before they call your competitor</p></div>
+    <div class="value-cell"><h3>Zero Manual Work</h3><p>Invoices, CRM, scheduling — all automated</p></div>
+    <div class="value-cell"><h3>Your Data Stays Yours</h3><p>Custom-built. Fixed price. No lock-in contracts.</p></div>
   </div>
 </div>
 
-<!-- control bar -->
-<header class="bar">
-  <div class="bar-brand">
-    <svg xmlns="http://www.w3.org/2000/svg" width="150" height="28" viewBox="0 0 320 60" role="img" aria-label="flowbots.ai"><g transform="translate(2 4)"><path stroke="#fff" stroke-linecap="round" stroke-width="2.5" d="M26 0v8"/><circle cx="26" r="3" fill="#38badf"/><rect width="44" height="36" x="4" y="10" fill="#fff" rx="12" ry="12"/><rect width="6" height="12" y="22" fill="#fff" rx="3" ry="3"/><rect width="6" height="12" x="46" y="22" fill="#fff" rx="3" ry="3"/><rect width="28" height="16" x="12" y="18" fill="#0a1628" rx="6" ry="6"/><rect width="7" height="10" x="16" y="21" fill="#38badf" rx="3" ry="3"/><rect width="7" height="10" x="29" y="21" fill="#38badf" rx="3" ry="3"/><path stroke="#0a1628" stroke-linecap="round" stroke-width="2" d="M19 40h14"/></g><text x="62" y="40" fill="#fff" font-family="'Space Grotesk',Arial,sans-serif" font-size="34" font-weight="700" letter-spacing="-.5">flowbots<tspan fill="#38badf">.ai</tspan></text></svg>
-    <span class="tag">Signal</span>
-  </div>
-
-  <div class="group">
-    <span class="group-label">Page</span>
-    <select id="pageSel" aria-label="Page">
-      <option value="home.html">Homepage</option>
-      <option value="solutions.html">Solutions — After-Hours Call Coverage</option>
-      <option value="industries.html">Industries — Medical &amp; Dental</option>
-      <option value="automations.html">Automations — Workflow Consulting</option>
-      <option value="pricing.html">Pricing</option>
-      <option value="about.html">About</option>
-      <option value="bio.html">Founder Bio — Brian &amp; Hanson</option>
-      <option value="blog.html">Blog Index</option>
-      <option value="blog-post.html">Blog Article</option>
-    </select>
-  </div>
-
-  <div class="group">
-    <span class="group-label">Device</span>
-    <div class="seg" id="devSeg" role="group" aria-label="Device preview">
-      <button data-dev="desktop" aria-pressed="true">Desktop</button>
-      <button data-dev="tablet" aria-pressed="false">Tablet</button>
-      <button data-dev="mobile" aria-pressed="false">Mobile</button>
-    </div>
-  </div>
-
-  <div class="bar-right">
-    <a class="linkbtn" id="openNew" href="home.html?motion=on" target="_blank" rel="noopener">Open full screen ↗</a>
-  </div>
-</header>
-
-<!-- stage -->
-<main class="stage">
-  <div class="stage-inner">
-    <div class="frame-wrap desktop" id="frameWrap">
-      <div class="device">
-        <div class="device-chrome">
-          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
-          <span class="url" id="urlBar">flowbots.ai</span>
-        </div>
-        <div class="notch"></div>
-        <iframe id="preview" src="d1/home.html" title="Design preview"></iframe>
+<!-- ============ 01 · WHAT WE BUILD ============ -->
+<section>
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">01</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">What We Build</span>
+        <h2>Custom AI Automation for Every Part of Your Business</h2>
+        <p>If your team does it on a keyboard or a phone, we can automate it. We build AI systems around your exact workflows, connected to your existing tools.</p>
       </div>
     </div>
-    <p class="stage-meta" id="stageMeta"><b>Direction 1 — Mission Control</b> · Homepage · Desktop</p>
+    <div class="grid-4">
+      <div class="card reveal">
+        <div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-mic"></use></svg></div>
+        <h3>AI Communication</h3>
+        <p>Voice, SMS, and email AI that handles every customer interaction 24/7.</p>
+        <ul><li>Inbound &amp; outbound voice AI</li><li>After-hours call coverage</li><li>SMS &amp; email follow-ups</li><li>Appointment reminders</li></ul>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-gear"></use></svg></div>
+        <h3>AI Operations</h3>
+        <p>Automate the back-office work that drains your team's time.</p>
+        <ul><li>Data entry &amp; document processing</li><li>Invoice &amp; payment processing</li><li>Scheduling &amp; calendar management</li><li>CRM &amp; system integration</li></ul>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-trending"></use></svg></div>
+        <h3>AI Growth</h3>
+        <p>Turn more leads into customers and more customers into repeat buyers.</p>
+        <ul><li>Review &amp; reputation management</li><li>Sales pipeline automation</li><li>Win-back &amp; reactivation campaigns</li><li>Lead nurturing in perpetuity</li></ul>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-users"></use></svg></div>
+        <h3>AI for Teams</h3>
+        <p>Scale your team's capacity without adding headcount.</p>
+        <ul><li>Customer service automation</li><li>HR &amp; onboarding automation</li><li>Dispatch &amp; route optimization</li><li>Reporting &amp; compliance</li></ul>
+      </div>
+    </div>
+    <p class="center mt-3 reveal"><a class="btn btn-ghost" href="automations.html">See All 40+ Automations We Build</a></p>
   </div>
+</section>
+
+<!-- ============ 02 · SOUND FAMILIAR ============ -->
+<section class="tint">
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">02</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Sound Familiar?</span>
+        <h2>The Problems Costing You Money Every Day</h2>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal">
+        <span class="card-num">i.</span>
+        <h3>“We're Losing Leads Because We Can't Call Back Fast Enough”</h3>
+        <p>By the time your team responds, the prospect already hired someone else. The first business to respond wins 78% of the time.</p>
+      </div>
+      <div class="card reveal">
+        <span class="card-num">ii.</span>
+        <h3>“My Best People Are Stuck Doing Data Entry Instead of Selling”</h3>
+        <p>You're paying high salaries for low-value work. 57% of U.S. work hours are automatable with technology that exists right now.</p>
+      </div>
+      <div class="card reveal">
+        <span class="card-num">iii.</span>
+        <h3>“Nothing Talks to Anything Else”</h3>
+        <p>You log into five different systems just to see what happened today. Your team wastes hours manually moving information between tools that don't connect.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 · BEFORE / AFTER ============ -->
+<section>
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">03</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">The Transformation</span>
+        <h2>Before FlowBots vs. After FlowBots</h2>
+      </div>
+    </div>
+    <div class="cmp reveal">
+      <div class="cmp-col bad">
+        <span class="cmp-tag">Without FlowBots</span>
+        <h3>Manual Operations</h3>
+        <ul>
+          <li>Missed calls go to voicemail</li>
+          <li>Hours-long lead response time</li>
+          <li>Manual data entry errors</li>
+          <li>Inconsistent customer experience</li>
+          <li>Staff overwhelmed with admin tasks</li>
+        </ul>
+      </div>
+      <div class="cmp-col good">
+        <span class="cmp-tag">With FlowBots</span>
+        <h3>AI-Powered Automation</h3>
+        <ul>
+          <li>Every call answered 24/7</li>
+          <li>Sub-second follow-up responses</li>
+          <li>Zero-error automated data entry</li>
+          <li>Consistent, professional interactions</li>
+          <li>Staff focused on high-value work</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 · HOW IT WORKS (interactive) ============ -->
+<section class="tint">
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">04</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">How It Works</span>
+        <h2>Three Steps to Automation</h2>
+      </div>
+    </div>
+
+    <div class="hiw" data-hiw>
+      <div class="hiw-track" role="tablist" aria-label="How it works steps">
+        <button class="hiw-step" role="tab" aria-selected="true">
+          <span class="hiw-n">Step 1</span>
+          <h3>Listen</h3>
+          <p>We study your exact workflows, tools, and business rules. No templates. No assumptions.</p>
+        </button>
+        <button class="hiw-step" role="tab" aria-selected="false">
+          <span class="hiw-n">Step 2</span>
+          <h3>Build</h3>
+          <p>We design and build a custom AI system that handles your specific tasks — calls, texts, emails, CRM updates, dispatching, compliance, whatever you need.</p>
+        </button>
+        <button class="hiw-step" role="tab" aria-selected="false">
+          <span class="hiw-n">Step 3</span>
+          <h3>Launch</h3>
+          <p>Your AI goes live. We monitor, optimize, and support. You focus on running your business.</p>
+        </button>
+      </div>
+
+      <div class="hiw-screen" data-hiw-screen>
+        <span class="sc-tag">Step 1 · Listen</span>
+        <div class="line"><span class="k">Discovery</span><span>A 30-minute call. Free. No pressure. No sales pitch.</span></div>
+        <div class="line"><span class="k">Workflows</span><span>We study your exact workflows, tools, and business rules.</span></div>
+        <div class="line"><span class="k">Scope</span><span>No templates. No assumptions.</span></div>
+        <div class="line"><span class="k ok">Roadmap</span><span>You see your top 3 automation opportunities.</span></div>
+      </div>
+      <div class="hiw-screen" data-hiw-screen style="display:none">
+        <span class="sc-tag">Step 2 · Build</span>
+        <div class="line"><span class="k">Design</span><span>A custom AI system built around your specific tasks.</span></div>
+        <div class="line"><span class="k">Channels</span><span>Calls, texts, emails, CRM updates, dispatching, compliance.</span></div>
+        <div class="line"><span class="k">Integrate</span><span>Salesforce, HubSpot, QuickBooks, ServiceTitan — all talking to each other.</span></div>
+        <div class="line"><span class="k ok">Proposal</span><span>Fixed-price, agreed before any work begins.</span></div>
+      </div>
+      <div class="hiw-screen" data-hiw-screen style="display:none">
+        <span class="sc-tag">Step 3 · Launch</span>
+        <div class="line"><span class="k">Go live</span><span>Most projects go live in 4–8 weeks.</span></div>
+        <div class="line"><span class="k">Support</span><span>We monitor, optimize, and support.</span></div>
+        <div class="line"><span class="k">Ownership</span><span>Your data stays yours. No lock-in contracts.</span></div>
+        <div class="line"><span class="k ok">Result</span><span>You focus on running your business.</span></div>
+      </div>
+    </div>
+
+    <div class="center mt-4 reveal">
+      <a class="btn btn-primary btn-lg" href="https://www.flowbots.ai/book-call/" data-track="cta-book">Book My Free Discovery Call</a>
+      <p class="micro">Most projects go live in 4–8 weeks. Fixed-price proposals — no surprise invoices.<br>Or call us directly: <a href="tel:+15047174837" data-track="tel-click">(504) 717-4837</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ASSESSMENT BAND ============ -->
+<section>
+  <div class="wrap">
+    <div class="band reveal">
+      <div>
+        <h4>Get Your Free Automation Assessment</h4>
+        <p>We'll map your manual workflows and show you exactly what can be automated — with projected ROI numbers.</p>
+      </div>
+      <div class="cta-col">
+        <a class="btn btn-accent btn-lg" href="#assessment" data-track="cta-assessment">Get My Free Assessment</a>
+        <p class="micro">30-minute call. We'll show you your top 3 automation opportunities.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 · OUR SERVICES ============ -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">05</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Our Services</span>
+        <h2>What We Build</h2>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal"><div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-bot"></use></svg></div><h3>Custom AI Automation</h3><p>If your team does it on a keyboard or phone, we can automate it. We build AI systems custom-designed around your exact workflows, tools, and business rules. You tell us the problem — we build the solution.</p></div>
+      <div class="card reveal"><div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-phone"></use></svg></div><h3>Voice &amp; Phone AI</h3><p>AI answers every call 24/7, qualifies callers, books appointments, recovers no-shows, and dispatches emergencies — while your team sleeps.</p></div>
+      <div class="card reveal"><div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-repeat"></use></svg></div><h3>Workflow Automation</h3><p>Every step, every handoff, every deadline — automated. Onboarding, approvals, route optimization, technician dispatch, compliance tracking, and escalations that run themselves.</p></div>
+      <div class="card reveal"><div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-cpu"></use></svg></div><h3>Data Intelligence</h3><p>AI reads your emails, documents, and data — surfaces what matters in real time. Bid intelligence, payroll exceptions, and revenue gaps you're missing.</p></div>
+      <div class="card reveal"><div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-plug"></use></svg></div><h3>System Integration</h3><p>Connect every tool your team uses into one real-time ecosystem. Salesforce, HubSpot, QuickBooks, ServiceTitan — all talking to each other.</p></div>
+      <div class="card reveal"><div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-message"></use></svg></div><h3>AI Assistants</h3><p>AI that talks to your customers, coaches your team, and answers questions — following your exact rules, 24 hours a day. SMS, email, and chat.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 · WHAT THE DATA SAYS ============ -->
+<section class="tint">
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">06</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">What the Data Says</span>
+        <h2>What AI Automation Actually Delivers</h2>
+        <p>These aren't hypotheticals. These are documented outcomes from businesses that automated the work your team is still doing by hand.</p>
+      </div>
+    </div>
+    <div class="stat-grid reveal">
+      <div class="stat"><b class="countup" data-target="78" data-suffix="%">0%</b><span class="stat-label">Buy From First Responder</span><span class="stat-src">Lead Connect / InsideSales.com</span></div>
+      <div class="stat"><b class="countup" data-target="62" data-suffix="%">0%</b><span class="stat-label">Of Calls Go Unanswered</span><span class="stat-src">411 Locals · 2024 Study</span></div>
+      <div class="stat"><b class="countup" data-target="57" data-suffix="%">0%</b><span class="stat-label">Of Work Hours Automatable</span><span class="stat-src">McKinsey · 2025</span></div>
+      <div class="stat"><b class="countup" data-target="3.50" data-prefix="$">$0</b><span class="stat-label">Return per $1 in AI</span><span class="stat-src">IBM · 2024</span></div>
+    </div>
+    <div class="grid-3 mt-3">
+      <div class="stat-detail reveal"><span class="tag">Revenue on the Table</span><b class="n">$1,200</b><h4>What Every Unanswered Call Costs You</h4><p>Home service businesses miss 27% of inbound calls, and each one costs roughly $1,200 in lost revenue. 85% of callers who reach voicemail never call back — they call your competitor instead.</p><span class="src">Source: Invoca 2024 · BrightLocal</span></div>
+      <div class="stat-detail reveal"><span class="tag">Speed Wins</span><b class="n">391%</b><h4>When You Respond in Under 60 Seconds</h4><p>Contacting a lead within the same minute they submit a form yields a 391% increase in conversions. The average business takes 42 hours to respond — and 63% never respond at all.</p><span class="src">Source: Velocify · RevenueHero 2024</span></div>
+      <div class="stat-detail reveal"><span class="tag">Legal</span><b class="n">50%</b><h4>What Happens When Law Firms Add AI Intake</h4><p>Only 40% of law firms answer the phone. Firms with online AI intake tools have 50% more incoming clients and 50% more revenue on average. 67% of potential clients hire the first firm to respond.</p><span class="src">Source: Clio 2024 Legal Trends Report · LEXGRO</span></div>
+      <div class="stat-detail reveal"><span class="tag">Hours Back</span><b class="n">80%</b><h4>The Real Cost of Manual Paperwork</h4><p>Manual invoice processing costs $15–$26 per invoice and takes an average of 17.4 days. Automated processing drops that to $2.50–$4 per invoice — an 80% reduction with near-zero errors.</p><span class="src">Source: Ardent Partners / IOFM 2024-2025</span></div>
+      <div class="stat-detail reveal"><span class="tag">Reach</span><b class="n">98%</b><h4>Why SMS Beats Email Every Time</h4><p>SMS has a 98% open rate vs. 20–37% for email. 90% of texts are read within 3 minutes.</p><span class="src">Source: Gartner · Omnisend 2024</span></div>
+      <div class="stat-detail reveal"><span class="tag">The Cost of Doing Nothing</span><b class="n">$126K</b><h4>What Missed Calls Cost You Annually</h4><p>The average small business loses approximately $126,000 per year in revenue from missed calls alone. 47% of home service calls happen outside business hours.</p><span class="src">Source: Numa / Phone2 · AgentZap 2026</span></div>
+    </div>
+    <p class="src-note reveal">Every stat above is sourced from published industry research. Your specific results depend on your business size, industry, and implementation scope.</p>
+  </div>
+</section>
+
+<!-- ============ 07 · PROBLEM → SOLUTION ============ -->
+<section>
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">07</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Not Sure Where to Start?</span>
+        <h2>Find Your Biggest Automation Opportunity</h2>
+        <p>Tell us what's eating your team's time. We'll tell you exactly what to automate first.</p>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card reveal"><h3>“We're missing calls after hours”</h3><p>Your phone goes to voicemail at 5 PM and leads call your competitor.</p><ul><li><strong class="accent">Voice AI</strong> — AI answers every call 24/7, qualifies leads, books appointments, and transfers with full context.</li></ul></div>
+      <div class="card reveal"><h3>“Leads go cold before we follow up”</h3><p>By the time your team responds, the prospect already hired someone else.</p><ul><li><strong class="accent">SMS &amp; Email AI</strong> — Instant follow-ups fire within seconds. Two-way conversations that convert leads while you sleep.</li></ul></div>
+      <div class="card reveal"><h3>“My team is buried in repetitive tasks”</h3><p>Data entry, scheduling, invoicing, follow-ups — your staff spends hours on work that doesn't grow the business.</p><ul><li><strong class="accent">Custom Workflow Automation</strong> — CRM updates, route optimization, technician dispatch, invoicing, compliance, reporting — all running automatically with zero manual input.</li></ul></div>
+      <div class="card reveal"><h3>“We need to scale without hiring”</h3><p>Business is growing but you can't keep adding headcount to keep up with demand.</p><ul><li><strong class="accent">Unified AI Brain</strong> — One AI system with shared memory across every channel. Handle 10x the volume without adding a single employee.</li></ul></div>
+    </div>
+    <p class="center mt-3 muted reveal">Not sure which one you need? That's exactly what the discovery call is for.</p>
+    <p class="center mt-2 reveal"><a class="btn btn-primary" href="https://www.flowbots.ai/book-call/" data-track="cta-book">Book My Free Discovery Call</a></p>
+  </div>
+</section>
+
+<!-- ============ 08 · THE INVESTMENT ============ -->
+<section class="tint">
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">08</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">The Investment</span>
+        <h2>The Math That Makes This Easy</h2>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="card reveal center"><h3>A Full-Time Receptionist</h3><b style="font-family:var(--font-display);font-size:2.1rem;display:block;margin:14px 0;color:var(--faint)">$3,500+/mo</b><p>Works 9–5. Takes vacations. Handles one call at a time. Misses after-hours leads.</p></div>
+      <div class="card reveal center"><h3>A Missed Lead</h3><b style="font-family:var(--font-display);font-size:2.1rem;display:block;margin:14px 0;color:var(--warn)">$500–$50K</b><p>Every unanswered call, every slow follow-up, every lead that went to your competitor instead.</p></div>
+      <div class="card reveal center" style="border-color:var(--accent)"><h3>FlowBots AI</h3><b style="font-family:var(--font-display);font-size:2.1rem;display:block;margin:14px 0;color:var(--accent)">24/7/365</b><p>Handles unlimited calls simultaneously. Never takes a day off. Gets smarter over time.</p></div>
+    </div>
+    <p class="center mt-3 muted reveal" style="max-width:700px;margin-left:auto;margin-right:auto">Projects start at <strong style="color:var(--ink)">$15,000</strong>. Most clients see measurable ROI within <strong style="color:var(--ink)">90 days</strong>. We give you a fixed-price proposal before any work begins — you know exactly what you're investing before you sign anything.</p>
+  </div>
+</section>
+
+<!-- ============ 09 · NOT A $99 CHATBOT ============ -->
+<section>
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">09</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">An Important Distinction</span>
+        <h2>This Is Not a $99/Month Chatbot</h2>
+      </div>
+    </div>
+    <div class="cmp reveal">
+      <div class="cmp-col bad">
+        <span class="cmp-tag">Template Platforms</span>
+        <h3>What $99/mo Gets You</h3>
+        <ul>
+          <li>Generic chatbot you configure yourself</li>
+          <li>Drag-and-drop templates that don't fit your workflow</li>
+          <li>You do all the integration work</li>
+          <li>Ticket-based support when it breaks</li>
+          <li>Their platform, their rules, their limitations</li>
+        </ul>
+      </div>
+      <div class="cmp-col good">
+        <span class="cmp-tag">FlowBots Custom Build</span>
+        <h3>What Custom Gets You</h3>
+        <ul>
+          <li>AI system designed for YOUR exact workflows</li>
+          <li>We study your business before writing a line of code</li>
+          <li>We handle every integration, end to end</li>
+          <li>Dedicated team that monitors and optimizes</li>
+          <li>Your data stays yours. No lock-in. Cancel anytime.</li>
+        </ul>
+      </div>
+    </div>
+    <p class="center mt-3 muted reveal" style="max-width:720px;margin-left:auto;margin-right:auto">Template platforms give you tools. We give you a finished, working system that runs your operations from day one. The difference is the same as buying a hammer versus hiring a contractor to build your house.</p>
+  </div>
+</section>
+
+<!-- ============ 10 · SPEED TABLE ============ -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">10</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">The Speed Difference</span>
+        <h2>What Used to Take Hours Now Takes Seconds</h2>
+      </div>
+    </div>
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr><th scope="col">Task</th><th scope="col">Manual</th><th scope="col">FlowBots</th></tr></thead>
+        <tbody>
+          <tr><td>Lead Response</td><td>4 Hours</td><td class="hl">30 Seconds</td></tr>
+          <tr><td>Technician Routing</td><td>Hours of Planning</td><td class="hl">One Click</td></tr>
+          <tr><td>Invoice Processing</td><td>20 Min/Each</td><td class="hl">Instant</td></tr>
+          <tr><td>Monthly Reporting</td><td>8 Hours</td><td class="hl">Real-Time</td></tr>
+          <tr><td>Employee Onboarding</td><td>5 Days</td><td class="hl">2 Hours</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src-note reveal">Source: Actual performance metrics from FlowBots automation deployments</p>
+  </div>
+</section>
+
+<!-- ============ 11 · INDUSTRIES TABS ============ -->
+<section class="tint">
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">11</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Built for Your Industry</span>
+        <h2>Automations That Actually Fit Your Business</h2>
+        <p>Click your industry. See the exact automations we build for businesses like yours — and why they pay for themselves.</p>
+      </div>
+    </div>
+    <div class="tabs reveal" data-tabs="industries" role="tablist" aria-label="Industries">
+      <button class="tab active" role="tab" aria-selected="true">Home Services <span class="cnt">9</span></button>
+      <button class="tab" role="tab" aria-selected="false">Healthcare &amp; Dental <span class="cnt">8</span></button>
+      <button class="tab" role="tab" aria-selected="false">Real Estate <span class="cnt">6</span></button>
+      <button class="tab" role="tab" aria-selected="false">Legal <span class="cnt">6</span></button>
+      <button class="tab" role="tab" aria-selected="false">Automotive <span class="cnt">6</span></button>
+      <button class="tab" role="tab" aria-selected="false">Restaurants <span class="cnt">6</span></button>
+    </div>
+    <div data-tabpanel="industries">
+      <div class="tabpanel active">
+        <p class="lead-in">HVAC, plumbing, and roofing companies recover an average of $4,200/mo in missed leads alone.</p>
+        <div class="grid-2">
+          <div class="card"><h4>Missed Call Text-Back</h4><p>Never lose a $2,000 job to voicemail again — AI texts back within 30 seconds</p></div>
+          <div class="card"><h4>Instant Lead Follow-Up</h4><p>Respond to new inquiries in seconds, not hours — the first to respond wins 78% of the time</p></div>
+          <div class="card"><h4>Route Optimization</h4><p>AI plans the fastest routes for your crews — cut drive time by 30%, fit more jobs per day, and save thousands on fuel</p></div>
+          <div class="card"><h4>Smart Appointment Booking</h4><p>Let customers book estimates 24/7 without calling your office</p></div>
+        </div>
+      </div>
+      <div class="tabpanel">
+        <p class="lead-in">Dental practices recover an average of $47K in lapsed-patient revenue within the first 30 days.</p>
+        <div class="grid-2">
+          <div class="card"><h4>AI Receptionist</h4><p>Answer every patient call instantly, even after hours — no more lost new patients</p></div>
+          <div class="card"><h4>Appointment Reminder Sequences</h4><p>Cut no-shows by 34% with smart SMS and voice reminders that let patients confirm or reschedule</p></div>
+          <div class="card"><h4>Patient Intake Automation</h4><p>Collect forms and insurance info before they walk in — 3x faster intake, zero data entry</p></div>
+          <div class="card"><h4>Recall &amp; Reactivation</h4><p>Bring back patients overdue for cleanings or checkups — automatically, at scale</p></div>
+        </div>
+      </div>
+      <div class="tabpanel">
+        <p class="lead-in">The first agent to respond wins 78% of the time. Our clients respond in under 30 seconds.</p>
+        <div class="grid-2">
+          <div class="card"><h4>Speed-to-Lead Response</h4><p>Engage new leads within 60 seconds, 24/7 — before they call the next agent on Google</p></div>
+          <div class="card"><h4>AI Lead Qualification</h4><p>Automatically sort tire-kickers from serious buyers so you only spend time on real opportunities</p></div>
+          <div class="card"><h4>Showing Scheduler</h4><p>Let prospects book property tours directly to your calendar — no more back-and-forth texts</p></div>
+          <div class="card"><h4>Long-Term Nurture Sequences</h4><p>Stay top-of-mind with leads not ready for 6–12 months — 80% convert after month 12</p></div>
+        </div>
+      </div>
+      <div class="tabpanel">
+        <p class="lead-in">Law firms using AI intake see 316% faster response times — critical when 30% of legal consumers hire within 3 days.</p>
+        <div class="grid-2">
+          <div class="card"><h4>24/7 Client Intake</h4><p>Capture and qualify potential clients around the clock — even weekends and holidays</p></div>
+          <div class="card"><h4>Missed Call Text-Back</h4><p>Never lose a potential case to an unanswered phone — AI responds instantly with next steps</p></div>
+          <div class="card"><h4>Consultation Scheduler</h4><p>Let prospects book a free consultation online instantly — no phone tag required</p></div>
+          <div class="card"><h4>Case Status Updates</h4><p>Proactively notify clients about case progress — the #1 bar complaint is lack of communication</p></div>
+        </div>
+      </div>
+      <div class="tabpanel">
+        <p class="lead-in">Shops using automated confirmations cut no-shows from 15% to 5% — saving $200–$500 per empty bay.</p>
+        <div class="grid-2">
+          <div class="card"><h4>Service Reminder Automation</h4><p>Automatically remind customers when maintenance is due — oil changes, tires, inspections</p></div>
+          <div class="card"><h4>AI Appointment Booking</h4><p>Let customers book service appointments 24/7 online — reclaim 15+ hours/week from phone scheduling</p></div>
+          <div class="card"><h4>Vehicle-Ready Notifications</h4><p>Automatically alert customers when their car is done — stop wasting staff time on outbound calls</p></div>
+          <div class="card"><h4>Post-Service Review Requests</h4><p>Turn every oil change into a 5-star Google review — outrank the national chains</p></div>
+        </div>
+      </div>
+      <div class="tabpanel">
+        <p class="lead-in">Restaurants using automated review responses see 40% more repeat customers within 90 days.</p>
+        <div class="grid-2">
+          <div class="card"><h4>Reservation Management</h4><p>Fill tables efficiently with AI-optimized booking — no more empty seats or overbooking headaches</p></div>
+          <div class="card"><h4>Review Response Automation</h4><p>Respond to every Google and Yelp review professionally — within minutes, not weeks</p></div>
+          <div class="card"><h4>Customer Re-Engagement</h4><p>Bring back lapsed diners with personalized offers — 70% of first-timers never return without follow-up</p></div>
+          <div class="card"><h4>Post-Dining Feedback</h4><p>Capture feedback before it hits Yelp — resolve issues privately, amplify positive experiences</p></div>
+        </div>
+      </div>
+    </div>
+    <p class="center mt-3 muted reveal">Don't see your industry? If your business has a phone, a CRM, or a team doing repetitive work, we can automate it. <a href="industries.html">Let's talk.</a></p>
+  </div>
+</section>
+
+<!-- ============ 12 · WHO WE ARE ============ -->
+<section>
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">12</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Who We Are</span>
+        <h2>Built by People Who've Done This Before</h2>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="card reveal">
+        <div class="founder-card">
+          <div class="avatar" aria-hidden="true">BH</div>
+          <div>
+            <h3>Brian Hong</h3>
+            <span class="role-tag">Co-Founder &amp; CEO</span>
+            <p>Over two decades in marketing and business strategy. Brian understands the operational pain points that business owners face every day — because he's lived them. He leads client strategy and ensures every automation solves a real business problem.</p>
+            <p class="mt-1"><a href="bio.html">Learn more about Brian →</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="card reveal">
+        <div class="founder-card">
+          <div class="avatar" aria-hidden="true">HC</div>
+          <div>
+            <h3>Hanson Cheng</h3>
+            <span class="role-tag">Co-Founder &amp; CTO</span>
+            <p>10+ years building enterprise automation and AI systems. Hanson designs the architecture behind every FlowBots project — from voice AI to complex multi-system integrations. He doesn't outsource the technical work. He builds it.</p>
+            <p class="mt-1"><a href="bio.html#hanson">Learn more about Hanson →</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <blockquote class="quote mt-4 reveal">
+      “We started FlowBots because we saw businesses spending thousands on tools that didn't talk to each other and teams buried in work that machines should handle. We build the systems that fix that.”
+      <footer>— Brian &amp; Hanson, Co-Founders</footer>
+    </blockquote>
+
+    <div class="grid-3 mt-4">
+      <div class="card reveal"><span class="card-num">i.</span><h4>Fixed-Price Proposals</h4><p>You know exactly what you're paying before any work begins. No surprise invoices. No scope creep charges.</p></div>
+      <div class="card reveal"><span class="card-num">ii.</span><h4>Your Data Stays Yours</h4><p>The code, the automations, the integrations — it's all yours. We don't hold your business hostage on our platform.</p></div>
+      <div class="card reveal"><span class="card-num">iii.</span><h4>No Long-Term Contracts</h4><p>Stay because the results speak for themselves, not because you're locked in. Month-to-month support after launch.</p></div>
+    </div>
+
+    <div class="card mt-3 reveal">
+      <h3>What We Don't Automate</h3>
+      <p>We automate tasks done on keyboards and phones — the repetitive work that drains your team's time. We don't replace human judgment, creativity, relationship-building, or the expertise that makes your business unique. AI handles the busywork. Your team handles the work that matters.</p>
+      <p class="mt-1 small" style="color:var(--accent)">Your people get better at their jobs when they stop doing work a machine should handle.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 13 · FAQ ============ -->
+<section class="tint">
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">13</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Common Questions</span>
+        <h2>Everything You Need to Know</h2>
+        <p>Straight answers. No fluff.</p>
+      </div>
+    </div>
+    <div class="faq reveal">
+      <details open>
+        <summary><span class="q-tag">Services</span>What exactly do you build?</summary>
+        <div class="faq-a">Custom AI systems designed around your specific workflows. If a human in your company does it on a keyboard or phone, we can probably automate it. Common builds: AI voice agents, SMS follow-up systems, CRM automation, compliance workflows, dispatching, payroll processing, and multi-channel communication systems.</div>
+      </details>
+      <details>
+        <summary><span class="q-tag">Pricing</span>How much does it cost?</summary>
+        <div class="faq-a">Projects range from $15,000 to $300,000 depending on scope. Pilot projects start at $15,000. AI voice usage is billed at $0.25/minute of actual call time. We give you a fixed-price quote before any work begins — no surprises.</div>
+      </details>
+      <details>
+        <summary><span class="q-tag">Timeline</span>How long does it take?</summary>
+        <div class="faq-a">Most projects take 4–8 weeks. Complex enterprise builds take 8–16 weeks. We'll give you a clear timeline during your discovery call.</div>
+      </details>
+      <details>
+        <summary><span class="q-tag">Integrations</span>What systems do you integrate with?</summary>
+        <div class="faq-a">30+ platforms including ServiceTitan, Salesforce, HubSpot, GoHighLevel, Dentrix, Mindbody, Boulevard, Clio, and more. If your system has an API, we can connect to it. Custom integrations are included in project scope.</div>
+      </details>
+      <details>
+        <summary><span class="q-tag">Security</span>Is this HIPAA compliant?</summary>
+        <div class="faq-a">Yes. We maintain Business Associate Agreements with all AI providers, enforce HIPAA protocols, and hold SOC 2 Type II certification with annual independent security audits.</div>
+      </details>
+      <details>
+        <summary><span class="q-tag">General</span>Will AI replace my employees?</summary>
+        <div class="faq-a">No. AI handles the repetitive tasks your team shouldn't be doing — answering phones, entering data, sending follow-ups. Your team focuses on complex problem-solving, relationship building, and strategic work that requires a human.</div>
+      </details>
+      <details>
+        <summary><span class="q-tag">Guarantee</span>What if it doesn't work?</summary>
+        <div class="faq-a">Every project starts with a fixed-price proposal. You know exactly what you're paying before any work begins. No surprise invoices, no scope creep charges. And your data and workflows are always yours — the code, the automations, the integrations. It's yours.</div>
+      </details>
+      <details>
+        <summary><span class="q-tag">Getting Started</span>How do I get started?</summary>
+        <div class="faq-a">Book a free discovery call. We'll spend 30 minutes mapping your current workflows, identifying automation opportunities, and showing you exactly what's possible. No pressure. No sales pitch.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 14 · BLOG TEASER ============ -->
+<section>
+  <div class="wrap">
+    <div class="num-head reveal">
+      <span class="n">14</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Latest Insights</span>
+        <h2>AI Automation News &amp; Guides</h2>
+        <p>Industry research, workforce transformation insights, and practical automation guides from the FlowBots team.</p>
+      </div>
+    </div>
+    <div class="post-grid">
+      <a class="post-card reveal" href="blog-post.html">
+        <span class="meta"><span class="cat">AI &amp; The Future of Work</span><span>Mar 23, 2026</span><span>6 min read</span></span>
+        <h3>AI for Tour Operators: Automate Bookings, Confirmations, and Reviews</h3>
+        <p>AI for tour operators automates booking confirmations, pre-tour preparation, post-tour review collection, and lead nurture for group inquiries…</p>
+        <span class="read">Read More →</span>
+      </a>
+      <a class="post-card reveal" href="blog.html">
+        <span class="meta"><span class="cat">AI &amp; The Future of Work</span><span>Mar 23, 2026</span><span>6 min read</span></span>
+        <h3>AI for Fishing Charters &amp; Outdoor Recreation: Book More Trips Automatically</h3>
+        <p>AI for fishing charters and outdoor recreation businesses automates trip booking, weather-related communication, post-trip review requests…</p>
+        <span class="read">Read More →</span>
+      </a>
+      <a class="post-card reveal" href="blog.html">
+        <span class="meta"><span class="cat">AI &amp; The Future of Work</span><span>Mar 23, 2026</span><span>6 min read</span></span>
+        <h3>AI for Specialty Retail: Automate Customer Follow-Up and Loyalty Programs</h3>
+        <p>AI for specialty retail automates customer follow-up, loyalty program management, personalized recommendations, and review generation…</p>
+        <span class="read">Read More →</span>
+      </a>
+    </div>
+    <p class="center mt-3 reveal"><a class="btn btn-ghost" href="blog.html">View All Articles</a></p>
+  </div>
+</section>
+
+
+<section class="lead-section" id="assessment">
+  <div class="wrap lead-grid">
+    <div class="lead-copy">
+      <span class="eyebrow">Free Automation Assessment</span>
+      <h2>See exactly what we would automate in your business</h2>
+      <p>Tell us what is eating your team's time. We map your current workflows and send back the three automations with the strongest projected return, before you commit to anything.</p>
+      <ul class="lead-assure">
+        <li>No cost and no obligation</li>
+        <li>A reply within one business day</li>
+        <li>HIPAA compliant and SOC 2 certified</li>
+        <li>Your data and workflows stay yours</li>
+      </ul>
+      <p class="lead-alt">Would rather talk it through now? <a href="tel:+15047174837" data-track="tel-click">Call (504) 717-4837</a></p>
+    </div>
+
+    <form class="lead-form" novalidate data-leadform>
+      <div class="field">
+        <label for="lf-name">Your name</label>
+        <input id="lf-name" name="name" type="text" autocomplete="name" required aria-describedby="lf-name-err">
+        <span class="field-err" id="lf-name-err" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="lf-email">Work email</label>
+        <input id="lf-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="lf-email-err">
+        <span class="field-err" id="lf-email-err" role="alert"></span>
+      </div>
+      <div class="field">
+        <label for="lf-phone">Phone <span class="opt">(optional)</span></label>
+        <input id="lf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" aria-describedby="lf-phone-hint">
+        <span class="field-hint" id="lf-phone-hint">Add it if you would prefer we call you back.</span>
+      </div>
+      <div class="field">
+        <label for="lf-problem">What is eating your team's time?</label>
+        <select id="lf-problem" name="problem" required aria-describedby="lf-problem-err">
+          <option value="">Choose the closest one</option>
+          <option>We are missing calls after hours</option>
+          <option>Leads go cold before we follow up</option>
+          <option>My team is buried in repetitive tasks</option>
+          <option>We need to scale without hiring</option>
+          <option>Something else</option>
+        </select>
+        <span class="field-err" id="lf-problem-err" role="alert"></span>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg lead-submit">Get My Free Assessment</button>
+      <p class="lead-privacy">We use your details only to prepare and send your assessment. See our <a href="https://www.flowbots.ai/privacy-policy/">Privacy Policy</a>.</p>
+    </form>
+
+    <div class="lead-success" hidden role="status">
+      <span class="lead-tick" aria-hidden="true">
+        <svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg>
+      </span>
+      <h3>Your assessment request is in</h3>
+      <p>We will map your workflows and reply within one business day with the three automations we would build first, and what each is worth.</p>
+      <p class="lead-alt">Need it sooner? <a href="tel:+15047174837" data-track="tel-click">Call (504) 717-4837</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRE-FOOTER CTA ============ -->
+<section class="prefoot">
+  <div class="wrap">
+    <h2 class="reveal">Stop Losing Leads While You Sleep</h2>
+    <p class="reveal">Your AI employee works 24/7 — answering calls, booking appointments, following up on leads.</p>
+    <div class="reveal">
+      <a class="btn btn-accent btn-lg" href="https://www.flowbots.ai/book-call/" data-track="cta-book">Book My Free Discovery Call</a>
+      <p class="micro">HIPAA Compliant · SOC 2 Certified · Custom-Built AI — Not Templates</p>
+    </div>
+  </div>
+</section>
+
 </main>
 
-<script>
-(function(){
-  var PAGE_URLS = {
-    'home.html':'flowbots.ai',
-    'solutions.html':'flowbots.ai/services/voice-ai/after-hours-call-coverage/',
-    'industries.html':'flowbots.ai/industries/healthcare/medical-dental-practices/',
-    'automations.html':'flowbots.ai/custom-ai-automations/workflow-automation-consulting/',
-    'pricing.html':'flowbots.ai/pricing/',
-    'about.html':'flowbots.ai/about/',
-    'bio.html':'flowbots.ai/about/brian-hong/',
-    'blog.html':'flowbots.ai/blog/',
-    'blog-post.html':'flowbots.ai/ai-for-tour-operators-automate-bookings-confirmations-and-reviews/'
-  };
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="170" height="32" viewBox="0 0 320 60" role="img" aria-label="flowbots.ai"><g transform="translate(2 4)"><path stroke="#fff" stroke-linecap="round" stroke-width="2.5" d="M26 0v8"/><circle cx="26" r="3" fill="#38badf"/><rect width="44" height="36" x="4" y="10" fill="#fff" rx="12" ry="12"/><rect width="6" height="12" y="22" fill="#fff" rx="3" ry="3"/><rect width="6" height="12" x="46" y="22" fill="#fff" rx="3" ry="3"/><rect width="28" height="16" x="12" y="18" fill="#0a1628" rx="6" ry="6"/><rect width="7" height="10" x="16" y="21" fill="#38badf" rx="3" ry="3"/><rect width="7" height="10" x="29" y="21" fill="#38badf" rx="3" ry="3"/><path stroke="#0a1628" stroke-linecap="round" stroke-width="2" d="M19 40h14"/></g><text x="62" y="40" fill="#fff" font-family="'Space Grotesk','DM Sans',Arial,sans-serif" font-size="34" font-weight="700" letter-spacing="-.5">flowbots<tspan fill="#38badf">.ai</tspan></text></svg>
+        <p class="footer-tag">We don't sell software. We build AI systems custom-designed around how your business actually runs.</p>
+        <p><a href="tel:+15047174837" data-track="tel-click">(504) 717-4837</a></p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="https://www.flowbots.ai/contact/">Contact</a></li>
+          <li><a href="https://www.flowbots.ai/privacy-policy/">Privacy Policy</a></li>
+          <li><a href="https://www.flowbots.ai/terms-of-service/">Terms of Service</a></li>
+          <li><a href="https://www.flowbots.ai/hipaa-compliance/">HIPAA Compliance</a></li>
+          <li><a href="https://www.flowbots.ai/data-security/">Data Security</a></li>
+          <li><a href="https://www.flowbots.ai/accessibility/">Accessibility</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="automations.html">Custom AI Automation</a></li>
+          <li><a href="solutions.html">Voice AI</a></li>
+          <li><a href="solutions.html">SMS AI</a></li>
+          <li><a href="solutions.html">Email AI</a></li>
+          <li><a href="solutions.html">Social AI</a></li>
+          <li><a href="solutions.html">White-Label</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Industries</h4>
+        <ul>
+          <li><a href="industries.html">Healthcare</a></li>
+          <li><a href="industries.html">Home Services</a></li>
+          <li><a href="industries.html">Professional Services</a></li>
+          <li><a href="industries.html">Automotive</a></li>
+          <li><a href="industries.html">Fitness &amp; Wellness</a></li>
+          <li><a href="industries.html">View All Industries</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="https://www.flowbots.ai/book-call/" data-track="cta-book">Book a Call</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="https://www.flowbots.ai/ai-automation-knowledge-base/">Knowledge Base</a></li>
+          <li><a href="https://www.flowbots.ai/hipaa-compliance/">HIPAA Compliance</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>HIPAA Compliant | SOC 2 Certified | Custom-Built AI — Not Templates</span>
+      <span>Contact: <a href="mailto:support@flowbots.ai">support@flowbots.ai</a> · © 2026 FlowBots.ai. All rights reserved.</span>
+    </div>
+  </div>
+</footer>
 
-  var page = 'home.html', dev = 'desktop';
-  var frame = document.getElementById('preview');
-  var wrap = document.getElementById('frameWrap');
-  var meta = document.getElementById('stageMeta');
-  var urlBar = document.getElementById('urlBar');
-  var openNew = document.getElementById('openNew');
-  var pageSel = document.getElementById('pageSel');
+<div class="sticky-cta">
+  <a class="btn btn-ghost" href="tel:+15047174837">Call (504) 717-4837</a>
+  <a class="btn btn-primary" href="https://www.flowbots.ai/book-call/" data-track="cta-book">Book My Free Discovery Call</a>
+</div>
 
-  function labelFor(sel){
-    var o = sel.options[sel.selectedIndex];
-    return o ? o.textContent.split('—')[0].trim() : '';
-  }
-  function render(){
-    // ?motion=on tells the page to animate even when the viewer's OS asks for
-    // reduced motion — otherwise these prototypes look completely static.
-    var q = '?motion=on';   // the designs are always animated
-    frame.src = page + q;
-    wrap.className = 'frame-wrap ' + dev;
-    urlBar.textContent = PAGE_URLS[page] || 'flowbots.ai';
-    openNew.href = page + q;
-    meta.innerHTML = '<b>Signal</b> · ' + labelFor(pageSel) +
-      ' · ' + dev.charAt(0).toUpperCase() + dev.slice(1) + ' &nbsp;·&nbsp; Light editorial system. Warm paper, deep navy ink, geometric headlines. Consultancy-grade and calm.';
-  }
-  function bindSeg(id, attr, setter){
-    var seg = document.getElementById(id);
-    seg.addEventListener('click', function(e){
-      var btn = e.target.closest('button');
-      if(!btn) return;
-      seg.querySelectorAll('button').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
-      btn.setAttribute('aria-pressed','true');
-      setter(btn.getAttribute(attr));
-      render();
-    });
-  }
-  bindSeg('devSeg','data-dev',function(v){ dev = v; });
-  pageSel.addEventListener('change', function(){ page = pageSel.value; render(); });
-
-  /* Always open on the Homepage. The previous build restored the last view
-     from localStorage, so reopening the link dropped you wherever you left
-     off instead of at the start of the walkthrough. */
-
-  /* welcome overlay — shown once per browser */
-  var welcome = document.getElementById('welcome');
-  var seen = false;
-  try{ seen = localStorage.getItem('fb-welcome') === '1'; }catch(e){}
-  if(seen) welcome.classList.add('hide');
-  document.getElementById('startBtn').addEventListener('click', function(){
-    welcome.classList.add('hide');
-    try{ localStorage.setItem('fb-welcome','1'); }catch(e){}
-  });
-
-  /* keyboard: arrows change page */
-  document.addEventListener('keydown', function(e){
-    if(e.target.tagName === 'SELECT' || !welcome.classList.contains('hide')) return;
-    if(e.key === 'ArrowRight' || e.key === 'ArrowLeft'){
-      var i = pageSel.selectedIndex + (e.key === 'ArrowRight' ? 1 : -1);
-      if(i < 0) i = pageSel.options.length - 1;
-      if(i >= pageSel.options.length) i = 0;
-      pageSel.selectedIndex = i;
-      page = pageSel.value;
-      render();
-    }
-  });
-
-  render();
-})();
-</script>
+<script src="app.js?v=13"></script>
 </body>
 </html>
