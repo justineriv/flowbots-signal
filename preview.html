@@ -263,6 +263,15 @@ iframe{
   };
 
   var page = 'index.html', dev = 'desktop';
+  // accept a handoff from the floating selector on a design page
+  (function(){
+    try{
+      var q = new URLSearchParams(location.search);
+      var qp = q.get('page'), qd = q.get('device');
+      if (qp) page = qp;
+      if (qd === 'tablet' || qd === 'mobile' || qd === 'desktop') dev = qd;
+    }catch(e){}
+  })();
   var frame = document.getElementById('preview');
   var wrap = document.getElementById('frameWrap');
   var meta = document.getElementById('stageMeta');
@@ -296,7 +305,17 @@ iframe{
       render();
     });
   }
-  bindSeg('devSeg','data-dev',function(v){ dev = v; });
+  bindSeg('devSeg','data-dev',function(v){
+    if (v === 'desktop') { location.href = page; return; }  // back to the full page
+    dev = v;
+  });
+  (function(){
+    var sel = document.getElementById('pageSel');
+    if (sel) sel.value = page;
+    document.querySelectorAll('#devSeg button').forEach(function(b){
+      b.setAttribute('aria-pressed', b.getAttribute('data-dev') === dev ? 'true' : 'false');
+    });
+  })();
   pageSel.addEventListener('change', function(){ page = pageSel.value; render(); });
 
   /* Always open on the Homepage. The previous build restored the last view

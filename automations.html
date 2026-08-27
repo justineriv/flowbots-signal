@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=16">
+<link rel="stylesheet" href="style.css?v=17">
 <script>/* These are the animated designs: motion is on unless a URL explicitly
    asks for ?motion=off. A production build should restore respect for
    prefers-reduced-motion; this is a review prototype. */
@@ -481,5 +481,32 @@ try{if(!/[?&]motion=off/.test(location.search))document.documentElement.classLis
 </div>
 
 <script src="app.js?v=14"></script>
+
+<!-- review control: device preview. Not part of the design. -->
+<div class="rv-device" role="group" aria-label="Device preview">
+  <span class="rv-label">View</span>
+  <button type="button" data-rv="desktop" aria-pressed="true">Desktop</button>
+  <button type="button" data-rv="tablet" aria-pressed="false">Tablet</button>
+  <button type="button" data-rv="mobile" aria-pressed="false">Mobile</button>
+</div>
+<script>
+(function(){
+  /* Device preview needs a real viewport, not a narrowed container: CSS media
+     queries answer to the viewport, so shrinking the page would show the
+     desktop layout at a small width. Tablet and mobile therefore hand off to
+     preview.html, which frames this same page in an iframe. */
+  var bar = document.querySelector('.rv-device');
+  if (!bar) return;
+  var page = location.pathname.split('/').pop() || 'index.html';
+  bar.addEventListener('click', function(e){
+    var b = e.target.closest('[data-rv]');
+    if (!b) return;
+    var d = b.getAttribute('data-rv');
+    if (d === 'desktop') return;
+    location.href = 'preview.html?page=' + encodeURIComponent(page) + '&device=' + d;
+  });
+})();
+</script>
+
 </body>
 </html>
