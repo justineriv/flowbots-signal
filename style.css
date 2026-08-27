@@ -933,3 +933,25 @@ a[href^="tel:"]{white-space:nowrap}
   .int-marks{gap:var(--s4) var(--s5)}
   .int-marks li{font-size:.94rem}
 }
+
+/* Single row, full width, using FlowBots' own integration marks.
+   Scrolls horizontally rather than wrapping when space runs out. */
+.integrations .wrap{max-width:1500px}
+.int-marks{
+  display:flex;flex-wrap:nowrap;justify-content:space-between;align-items:center;
+  gap:var(--s5);margin:0 0 var(--s5);overflow-x:auto;scrollbar-width:none;
+  padding-bottom:2px;
+}
+.int-marks::-webkit-scrollbar{display:none}
+.int-marks li{flex:0 0 auto;display:flex;align-items:center}
+.int-marks img{
+  height:30px;width:auto;display:block;
+  opacity:.82;transition:opacity .16s ease-out,transform .16s ease-out;
+}
+.int-marks li:hover img{opacity:1;transform:translateY(-1px)}
+@media(max-width:1100px){.int-marks{justify-content:flex-start;gap:var(--s6)}.int-marks img{height:26px}}
+@media(max-width:720px){
+  .integrations .wrap{padding-right:0}
+  .int-marks{gap:var(--s5)}
+  .int-marks img{height:24px}
+}
