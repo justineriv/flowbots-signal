@@ -211,6 +211,26 @@
     });
   }
 
+
+  /* Back to top. Appears once the visitor is well down the page, and
+     respects a reduced-motion preference for the scroll itself. */
+  var toTop = document.querySelector('.to-top');
+  if (toTop) {
+    toTop.hidden = false;
+    var THRESHOLD = 800;
+    var syncTop = function () {
+      toTop.classList.toggle('show', window.scrollY > THRESHOLD);
+    };
+    window.addEventListener('scroll', syncTop, { passive: true });
+    syncTop();
+    toTop.addEventListener('click', function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      var h = document.querySelector('h1, .hero h1');
+      if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+    });
+  }
+
   /* Sticky mobile CTA */
   var sticky = document.querySelector('.sticky-cta');
   if (sticky) {
