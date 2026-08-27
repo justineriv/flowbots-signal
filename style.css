@@ -626,3 +626,85 @@ html.motion-on .flow-pulse.p1{animation-delay:0s}
   .lead-form{padding:24px}
   .field input,.field select{font-size:16px} /* 16px stops iOS zooming on focus */
 }
+
+
+/* ============================================================
+   SPACING SCALE
+   Every vertical gap now comes from one scale instead of ad-hoc
+   values, which is what made the rhythm read as slightly off.
+   ============================================================ */
+:root{
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px;
+  --s6:32px; --s7:48px; --s8:64px; --s9:88px; --s10:120px;
+  --sec-panel:#FFFFFF;
+  --sec-inset:#F1EDE4;
+  --sec-dot:rgba(10,22,40,.07);
+  --sec-edge:rgba(10,22,40,.10);
+}
+
+/* hero rhythm, on the scale */
+.hero .eyebrow{margin-bottom:var(--s5)}
+.hero h1{margin-bottom:var(--s5)}
+.hero .lede{margin-bottom:var(--s6)}
+.hero .cta-row{gap:var(--s4);margin-bottom:var(--s4)}
+.hero .micro{margin-top:0;margin-bottom:var(--s6)}
+.hero .hero-trust,.hero .hero-meta{margin-top:0}
+.cta-row{gap:var(--s4)}
+
+/* ============================================================
+   SECTION SKINS
+   Seven grounds instead of two alternating fills, assigned so no
+   two neighbouring sections share a treatment.
+   ============================================================ */
+section{position:relative}
+
+/* 1 — plain: the base ground, no treatment */
+
+/* 2 — panel: a raised, tinted plane */
+.sec-panel{background:var(--sec-panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+/* 3 — grid: base ground carrying a faint dot matrix */
+.sec-grid{background:var(--bg)}
+.sec-grid::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(var(--sec-dot) 1px,transparent 1px);
+  background-size:26px 26px;
+  mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent);
+}
+.sec-grid > *{position:relative;z-index:1}
+
+/* 4 — wash: a diagonal colour gradient across the band */
+.sec-wash{
+  background:
+    linear-gradient(150deg,rgba(14,143,180,.07) 0%,transparent 52%),
+    linear-gradient(320deg,rgba(196,164,106,.06) 0%,transparent 46%),
+    var(--bg);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+
+/* 5 — inset: a recessed band, set back from the page */
+.sec-inset{
+  background:var(--sec-inset);
+  border-top:1px solid var(--sec-edge);border-bottom:1px solid var(--sec-edge);
+  box-shadow:inset 0 14px 28px -18px rgba(0,0,0,.5), inset 0 -14px 28px -18px rgba(0,0,0,.5);
+}
+
+/* 6 — rule: base ground with a hard accent rule along the top edge */
+.sec-rule{background:var(--bg);border-top:2px solid var(--accent)}
+.sec-rule::after{
+  content:"";position:absolute;top:0;left:0;width:120px;height:2px;
+  background:var(--accent);box-shadow:0 0 18px var(--accent);
+}
+
+/* 7 — feature: the strongest band, reserved for the conversion block */
+.sec-feature{
+  background:
+    radial-gradient(900px 420px at 22% 0%,rgba(14,143,180,.10),transparent 62%),
+    radial-gradient(700px 380px at 88% 100%,rgba(196,164,106,.08),transparent 60%),
+    var(--sec-panel);
+  border-top:1px solid var(--sec-edge);border-bottom:1px solid var(--sec-edge);
+}
+
+/* angled transition, used where two contrasting grounds meet */
+.sec-angle-top{clip-path:polygon(0 38px,100% 0,100% 100%,0 100%);margin-top:-38px;padding-top:calc(var(--s9) + 38px)}
+@media(max-width:720px){.sec-angle-top{clip-path:polygon(0 20px,100% 0,100% 100%,0 100%);margin-top:-20px;padding-top:calc(var(--s8) + 20px)}}
